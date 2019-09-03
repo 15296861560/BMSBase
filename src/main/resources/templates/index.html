@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
+    <script src="/js/jquery-3.4.1.min.js" ></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+
+</head>
+<!--是否关闭页面-->
+<script type="application/javascript">
+    window.onload=function () {//进入页面的时候加载
+        var closable=window.localStorage.getItem("closable");
+        if (closable=="true"){//localStorage里存的是字符串
+            window.close();
+            window.localStorage.removeItem("closable");
+        }
+    }
+</script>
+
+<body>
+
+<!--导航栏-->
+<div th:insert="~{navigation::nav}"></div>
+
+<div class="container-fluid main">
+
+</div>
+<!--页尾-->
+<div th:insert="~{footer::foot}"></div>
+</body>
+</html>
