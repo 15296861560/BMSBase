@@ -7,4 +7,5 @@ public class book {
     private Long id;
     private String name;
     private Integer type;
+    private Integer status;
 }

@@ -1,5 +1,13 @@
 ## SpringBoot
 
+##git创建新的存储库
+ ##步骤
+ - git init
+ - git add README.md
+ - git commit -m "first commit"
+ - git remote add origin 库地址
+ - git push -u origin master
+
 ##部署
  - Git
  - JDK
