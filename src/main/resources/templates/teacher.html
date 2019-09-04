@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>图书管理系统</title>
+    <title>图书管理系统(管理端）</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
@@ -11,15 +11,15 @@
 
 </head>
 <!--是否关闭页面-->
-<script type="application/javascript">
-    window.onload=function () {//进入页面的时候加载
-        var closable=window.localStorage.getItem("closable");
-        if (closable=="true"){//localStorage里存的是字符串
-            window.close();
-            window.localStorage.removeItem("closable");
-        }
-    }
-</script>
+<!--<script type="application/javascript">-->
+    <!--window.onload=function () {//进入页面的时候加载-->
+        <!--var closable=window.localStorage.getItem("closable");-->
+        <!--if (closable=="true"){//localStorage里存的是字符串-->
+            <!--window.close();-->
+            <!--window.localStorage.removeItem("closable");-->
+        <!--}-->
+    <!--}-->
+<!--</script>-->
 
 <body>
 
@@ -33,12 +33,12 @@
         <ul class="list-group">
             <li class="list-group-item list-item">
                 <a href="#">
-                    <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>大数据分析
+                <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>大数据分析
                 </a>
             </li>
             <li class="list-group-item list-item">
                 <a href="#">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>图书查询
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>图书查询
                 </a>
             </li>
             <li class="list-group-item list-item">
@@ -51,7 +51,6 @@
                 <span class="glyphicon glyphicon-book" aria-hidden="true"></span>图书管理
             </li>
         </ul>
-
 
     </div>
 

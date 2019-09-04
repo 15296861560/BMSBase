@@ -3,9 +3,6 @@
 <body>
 
 <div th:fragment="nav">
-    <div background="/images/img12.jpg">
-        <h1>LGY图书管理云平台</h1>
-    </div>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -18,14 +15,46 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left" action="/" method="get">
                     <div class="form-group">
-                        <input type="text" name="search" class="form-control" placeholder="搜索问题">
+                        <input type="text" name="search" class="form-control" placeholder="搜索书籍">
                     </div>
                     <button type="submit" class="btn btn-default">搜索</button>
                 </form>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!--检测session是否存在user-->
+                    <li class="dropdown" th:if="${session.user!=null}">
+                        <!--获取存在session中的用户名-->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" >
+                            <span th:text="${session.user.getName()}"></span>
+                            <!--下拉小箭头-->
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li><a href="#">个人资料</a></li>
+                            <li><a href="#">个人阅历</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">退出登录</a></li>
+                        </ul>
+                    </li>
+                    <!--当没有session的时候，显示登录注册按钮，隐藏个人信息-->
+                    <li th:if="${session.user==null}">
+                        <a href="#">登录</a>
+                    </li>
+                    <li th:if="${session.user==null}">
+                        <a href="#">注册</a>
+                    </li>
+
+                </ul>
+
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
-    </nav>
 
+        <div>
+
+        </div>
+    </nav>
 
 </div>
 
