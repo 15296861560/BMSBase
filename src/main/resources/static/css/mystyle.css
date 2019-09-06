@@ -1,9 +1,19 @@
 
-.list-item{
-    height: 100px;
-    font-size: -webkit-xxx-large;
-}
+
 
 .font-locatin{
     margin-left: 400px;
+}
+
+
+.list-item{
+    height: 100px;
+    /*font-size: -webkit-xxx-large;*/
+    font-size: x-large;
+}
+
+.footer{
+    padding: 30px 0 10px;
+    font-size: 12px;
+    text-align: center;
 }

@@ -1,0 +1,31 @@
+
+
+.bg{
+    background-image: url(/images/library.jpg);
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.tiled {
+    padding: 25px;
+    background-color:white;
+}
+
+.fixed-page {
+    width: 500px;
+    margin: auto;
+    padding: 30px;
+}
+
+.align-items-center {
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.img-top{
+    margin-top: 150px;
+}
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/jquery-3.4.1.min.js" ></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+
+</head>
+
+<body>
+
+<!--导航栏-->
+<div th:insert="~{navigation::nav}"></div>
+
+<div class="align-items-center ">
+
+<div class="bg">
+    <div >
+        <div class="text-center ">
+            <a href="/"><img class="img-top" src="/images/admin.png"  height="100" width="100"></a>
+        </div>
+
+        <h3 class="text-center">管理员登录</h3>
+
+    </div>
+
+    <div class="fixed-page">
+        <div class="tiled ">
+            <form role="form" method="post">
+                <div class="form-group ">
+                    <label >管理员账号:</label>
+                    <input type="text" class="form-control" name="user" value="">
+                    <label >管理员密码:</label>
+                    <input type="password" class="form-control" name="pass" value="">
+                    <p class="help-block">小提示.</p>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block m-t-25">登录</button>
+            </form>
+        </div>
+
+
+
+
+    </div></div>
+    <div id="intercom-modal-container"></div>
+    <!--页尾-->
+    <div th:insert="~{footer::foot}"></div>
+</div>
+
+</body>
+</html>
