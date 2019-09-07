@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>登录</title>
+    <title>注册</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
@@ -21,24 +21,28 @@
 <div class="bg">
     <div >
         <div class="text-center ">
-            <a href="/"><img class="img-top" th:src="${img_src}"  height="100" width="100"></a>
+            <a href="/"><img class="img-top" src="/images/user_register.png"  height="100" width="100"></a>
         </div>
 
-        <h3 class="text-center" th:text="${tip}"></h3>
+        <h3 class="text-center">读者注册</h3>
 
     </div>
 
     <div class="fixed-page">
         <div class="tiled ">
-            <form role="form" method="post">
+            <form action="/publish" method="post">
                 <div class="form-group ">
-                    <label th:text="${account}"></label>
+                    <label>请输入您的学号</label>
                     <input type="text" class="form-control" name="user" value="">
-                    <label  th:text="${pwd}"></label>
+                    <label>请输入您的密码</label>
                     <input type="password" class="form-control" name="pass" value="">
-                    <p class="help-block">小提示.</p>
+                    <label>请确认您的密码</label>
+                    <input type="password" class="form-control" name="re_pass" value="">
+                    <p class="help-block">小提示:
+                        <br>1.已经注册过的学号不能再注册了
+                        <br>2.不是我们学校的学生不可以注册</p>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block m-t-25">登录</button>
+                <button type="submit" class="btn btn-primary btn-block m-t-25">注册</button>
             </form>
         </div>
 

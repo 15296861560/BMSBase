@@ -61,6 +61,12 @@
             <version>1.2.59</version>
         </dependency>
 
+        <!--短信包服务-->
+        <dependency>
+            <groupId>cn.ucloud</groupId>
+            <artifactId>ucloud-sdk-java-usms</artifactId>
+            <version>0.8.2.4-release</version>
+        </dependency>
     </dependencies>
 
     <build>
