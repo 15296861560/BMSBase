@@ -41,10 +41,10 @@
                     </li>
                     <!--当没有session的时候，显示登录注册按钮，隐藏个人信息-->
                     <li th:if="${session.user==null}">
-                        <a href="#">登录</a>
+                        <a href="/login">登录</a>
                     </li>
                     <li th:if="${session.user==null}">
-                        <a href="#">注册</a>
+                        <a href="/register">注册</a>
                     </li>
 
                 </ul>
