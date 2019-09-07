@@ -1,5 +1,6 @@
 package com.bms.bms.service;
 
+import com.bms.bms.mapper.AdminMapper;
 import com.bms.bms.mapper.StudentMapper;
 import com.bms.bms.mapper.UserMapper;
 import com.bms.bms.model.Student;
@@ -11,30 +12,14 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class RegisterService {
+public class LoginService {
     @Autowired
-    private StudentMapper studentMapper;
+    private AdminMapper adminMapper;
     @Autowired
     private UserMapper userMapper;
 
     public boolean register(Long id,String password){
-        //检查是否已注册
-        User user=userMapper.findById(id);
-        if (user==null) {
-//        检查学校是否有该学生存在
-            Student student = studentMapper.findById(id);
-            if (student != null) {
-                createUser(student, password);
-                return true;
-            }
-            else {
-//                该学号不存在
-                return false;
-            }
-        }else {
-//            已注册过了
             return false;
-        }
 
     }
 
@@ -50,7 +35,6 @@ public class RegisterService {
         user.setStatus(0);
         user.setBorrowCount(0);
         user.setHistory("");
-        userMapper.createUser(user);
 
     }
 

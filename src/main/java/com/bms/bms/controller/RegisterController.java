@@ -19,18 +19,13 @@ public class RegisterController {
     RegisterService registerService;
 
     @GetMapping("/register")
-    public String registerr(Model model){
-        model.addAttribute("img_src","/images/user_register.png");
-        model.addAttribute("tip","读者注册");
-        model.addAttribute("account","请输入您的学号:");
-        model.addAttribute("pwd","请输入您的密码:");
-        model.addAttribute("action","注册");
+    public String register(Model model){
 
         return "register";
     }
 
     @PostMapping("/register")// post方法给你请求
-    public String doPublish(
+    public String doRegister(
             @RequestParam(value = "id",required = false)Long id,
             @RequestParam(value ="password",required = false)String password,
             HttpServletRequest request,
