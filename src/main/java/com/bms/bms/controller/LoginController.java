@@ -1,6 +1,7 @@
 package com.bms.bms.controller;
 
 import com.bms.bms.service.AdminService;
+import com.bms.bms.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
     @Autowired
     AdminService adminService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/login/admin")
     public String login_admin(Model model){
@@ -30,7 +34,7 @@ public class LoginController {
     }
 
     @PostMapping("/login/admin")// post方法给你请求
-    public String doRegister(
+    public String doLoginAdmin(
             @RequestParam(value = "id",required = false)Long id,
             @RequestParam(value ="password",required = false)String password,
             HttpServletRequest request,
@@ -42,8 +46,6 @@ public class LoginController {
 //            登录失败
             return null;
         }
-
-
     }
 
 
@@ -56,6 +58,32 @@ public class LoginController {
         model.addAttribute("action","登录");
 
         return "login";
+    }
+
+
+    @PostMapping("/login/user")// post方法给你请求
+    public String doLoginUser(
+            @RequestParam(value = "id",required = false)Long id,
+            @RequestParam(value ="password",required = false)String password,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Model model){
+        if (userService.confirm(id,password))
+            return "redirect:/book";
+        else {
+//            登录失败
+            return null;
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse response){
+        request.getSession().removeAttribute("user");//移除session中的user
+        //删除cookie中的token
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 }
