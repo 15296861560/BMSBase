@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class RegisterService {
+public class UserService {
     @Autowired
     private StudentMapper studentMapper;
     @Autowired
@@ -38,9 +38,17 @@ public class RegisterService {
 
     }
 
+    public boolean confirm(Long id,String password){
+        User user=userMapper.findById(id);
+        if (user==null)return false;
+        if (user.getPassword().equals(password))return true;
+        else return false;
+    }
+
+
     //    创建用户
     private void createUser(Student student,String password) {
-        User user=null;
+        User user=new User();
         String token= UUID.randomUUID().toString();
         BeanUtils.copyProperties(student,user);//把student的所有属性拷贝到user上面
         user.setGmtCreate(System.currentTimeMillis());

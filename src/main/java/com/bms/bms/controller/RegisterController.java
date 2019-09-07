@@ -1,7 +1,7 @@
 package com.bms.bms.controller;
 
 import com.bms.bms.model.User;
-import com.bms.bms.service.RegisterService;
+import com.bms.bms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class RegisterController {
     @Autowired
-    RegisterService registerService;
+    UserService userService;
 
     @GetMapping("/register")
     public String register(Model model){
@@ -31,14 +31,13 @@ public class RegisterController {
             HttpServletRequest request,
             HttpServletResponse response,
             Model model){
-        if (registerService.register(id,password)){
-            User user=registerService.findById(id);
+        if (userService.register(id,password)){
+            User user= userService.findById(id);
             request.getSession().setAttribute("user",user);
             //将token写入cookie
             response.addCookie(new Cookie("token",user.getToken()));
-            model.addAttribute("info","恭喜注册成功");
             //重定向回首页
-            return "redirect:/";
+            return "redirect:/book";
         }
 
         return null;

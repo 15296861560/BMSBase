@@ -1,6 +1,8 @@
 package com.bms.bms.controller;
 
+import com.bms.bms.service.AdminService;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
+    @Autowired
+    AdminService adminService;
 
     @GetMapping("/login/admin")
     public String login_admin(Model model){
@@ -32,9 +36,12 @@ public class LoginController {
             HttpServletRequest request,
             HttpServletResponse response,
             Model model){
-
-
+        if (adminService.confirm(id,password))
         return "redirect:/teacher";
+        else {
+//            登录失败
+            return null;
+        }
 
 
     }
