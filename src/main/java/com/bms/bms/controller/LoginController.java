@@ -1,5 +1,6 @@
 package com.bms.bms.controller;
 
+import com.bms.bms.model.User;
 import com.bms.bms.service.AdminService;
 import com.bms.bms.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -68,8 +69,14 @@ public class LoginController {
             HttpServletRequest request,
             HttpServletResponse response,
             Model model){
-        if (userService.confirm(id,password))
+        if (userService.confirm(id,password)){
+            User user= userService.findById(id);
+            request.getSession().setAttribute("user",user);
+            //将token写入cookie
+            response.addCookie(new Cookie("token",user.getToken()));
             return "redirect:/book";
+
+        }
         else {
 //            登录失败
             return null;
