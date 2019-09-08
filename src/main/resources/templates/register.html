@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/login.css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <script src="/js/myjs.js" type="application/javascript"></script>
 
 </head>
 
@@ -28,21 +29,22 @@
 
     </div>
 
+
     <div class="fixed-page">
         <div class="tiled ">
-            <form action="/register" method="post">
+            <form action="/register" method="post"  onsubmit="return checkout()">
                 <div class="form-group ">
                     <label>请输入您的学号</label>
-                    <input type="text" class="form-control" name="id" value="">
+                    <input type="text" class="form-control" id="id" value="">
                     <label>请输入您的密码</label>
-                    <input type="password" class="form-control" name="password" value="">
+                    <input type="password" class="form-control" id="password" value="">
                     <label>请确认您的密码</label>
-                    <input type="password" class="form-control" name="re_password" value="">
+                    <input type="password" class="form-control" id="re_password" value="">
                     <p class="help-block">小提示:
                         <br>1.已经注册过的学号不能再注册了
                         <br>2.不是我们学校的学生不可以注册</p>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block m-t-25">注册</button>
+                <button type="submit" class="btn btn-primary btn-block m-t-25"  >注册</button>
             </form>
         </div>
 
