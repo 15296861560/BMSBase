@@ -42,7 +42,7 @@ public class LoginController {
             HttpServletResponse response,
             Model model){
         if (adminService.confirm(id,password))
-        return "redirect:/teacher";
+        return "redirect:/manage";
         else {
 //            登录失败
             return null;

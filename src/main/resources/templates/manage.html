@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
     <link rel="stylesheet" href="/css/mystyle.css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
@@ -24,31 +25,19 @@
 <body>
 
 <!--导航栏-->
-<div th:insert="~{navigation::nav}"></div>
+<div th:insert="~{navigation-manage::nav}"></div>
 
 <div class="container-fluid main">
 
     <!--左边-->
-    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-        <div class="btn-group-vertical" role="group" aria-label="...">
-            <button type="button" class="btn btn-default list-item">
-                <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>大数据分析
-            </button>
-            <button type="button" class="btn btn-default list-item">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>图书查询
-
-            </button>
-            <button type="button" class="btn btn-default list-item">
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>读者查询
-            </button>
-            <button type="button" class="btn btn-default list-item">
-                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>用户管理
-
-            </button>
-            <button type="button" class="btn btn-default list-item">
-                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>图书管理
-            </button>
-        </div>
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 list-group bg-black">
+            <a href="#" class="list-group-item active">
+                Cras justo odio
+            </a>
+            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
 
 
     </div>
