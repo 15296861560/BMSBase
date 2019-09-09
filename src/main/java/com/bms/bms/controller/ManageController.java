@@ -18,10 +18,10 @@ public class ManageController {
 
     @GetMapping("/manage")
     public String manage(Model model){
-        return "manage/senback";
+        return "redirect:/sendback";
     }
 
-    @GetMapping("/manage/sendback")
+    @GetMapping("/sendback")
     public String sendback(Model model,
                            @RequestParam(name="page",defaultValue = "1")Integer page,//通过@RequestParam注解获取名字为page的参数默认值为1类型为Integer
                            @RequestParam(name="size",defaultValue = "5")Integer size,
@@ -31,6 +31,7 @@ public class ManageController {
         PageDTO pageDTO=notificationService.list(search,page,size);
 //        model.addAttribute("notificationDTOS",notificationDTOS);
         model.addAttribute("pageDTO",pageDTO);
+        model.addAttribute("section","sendback");
 
         return "manage";
     }

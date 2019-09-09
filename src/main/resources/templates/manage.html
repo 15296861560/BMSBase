@@ -23,9 +23,17 @@
     <div class="media"  th:each="notificationDTO:${pageDTO.getDataDTOS()}">
         <div class="media-body">
             <h4 class="media-heading" >
-                <span th:text="${notificationDTO.user.name+notificationDTO.status}"></span>
-                <a href="#" th:text="${notificationDTO.book.name}"></a>
-                <span class="label label-danger" th:if="${notificationDTO.status != 0}">未同意</span>
+                <div class="row">
+                    <div class="col-md-4"><span th:text="${notificationDTO.user.name+notificationDTO.status}"></span></div>
+                    <div class="col-md-4"><a th:href="@{'/book/'+${notificationDTO.book.id}}" th:text="${notificationDTO.book.name}"></a></div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-success">归还成功</button>
+                        <button type="button" class="btn btn-danger">拒绝归还</button>
+                    </div>
+                </div>
+
+
+
             </h4>
         </div>
     </div>
@@ -33,26 +41,25 @@
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li th:if="${pageDTO.showFirst}">
-                <a href="/?page=1,search=${search}" aria-label="First">
+                <a th:href="@{/sendback/(page=1,search=${search})}" aria-label="First">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
 
             <li th:if="${pageDTO.showPre}">
-                <a th:href="@{/(page=${pageDTO.currentPage - 1},search=${search})}" aria-label="Pre">
+                <a th:href="@{/sendback/(page=${pageDTO.currentPage - 1},search=${search})}" aria-label="Pre">
                     <span aria-hidden="true">&lt;</span>
                 </a>
             </li>
-            <li th:each=" page: ${pageDTO.pages}" th:class="${pageDTO.currentPage==page}?'active':''"><a th:href="@{/(page=${page},search=${search})}" th:text="${page}" ></a></li>
+            <li th:each=" page: ${pageDTO.pages}" th:class="${pageDTO.currentPage==page}?'active':''"><a th:href="@{/sendback/(page=${page},search=${search})}" th:text="${page}" ></a></li>
 
             <li th:if="${pageDTO.showNext}">
-                <a th:href="@{/(page=${pageDTO.currentPage+1},search=${search})}" aria-label="Next">
+                <a th:href="@{/sendback/(page=${pageDTO.currentPage+1},search=${search})}" aria-label="Next">
                     <span aria-hidden="true">&gt;</span>
                 </a>
             </li>
             <li th:if="${pageDTO.showEnd}">
-
-                <a th:href="@{/(page=${pageDTO.totalPage},search=${search})}" aria-label="End">
+                <a th:href="@{/sendback/(page=${pageDTO.totalPage},search=${search})}" aria-label="End">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
 

@@ -70,6 +70,7 @@ public class NotificationService {
         List<NotificationDTO> notificationDTOS=new ArrayList();
         for(Notification notification:notifications){
             NotificationDTO notificationDTO=new NotificationDTO();
+            notificationDTO.setId(notification.getId());
             notificationDTO.setUser(userMapper.findById(notification.getUserId()));
             notificationDTO.setBook(bookMapper.findById(notification.getBookId()));
             notificationDTO.setGmtCreate(notification.getGmtCreate());

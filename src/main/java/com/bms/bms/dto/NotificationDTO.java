@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class NotificationDTO {
+    private Long id;
     private User user;//借阅人
     private Book book;//所借书
     private Long gmtCreate;//借阅时间
