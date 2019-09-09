@@ -1,5 +1,6 @@
 package com.bms.bms.controller;
 
+import com.bms.bms.exception.CustomizeErrorCode;
 import com.bms.bms.model.User;
 import com.bms.bms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,24 @@ public class RegisterController {
             HttpServletRequest request,
             HttpServletResponse response,
             Model model){
-        if (userService.register(id,password)){
+        String result = userService.register(id, password);
+        if (result.equals("sussess")){
             User user= userService.findById(id);
             request.getSession().setAttribute("user",user);
             //将token写入cookie
             response.addCookie(new Cookie("token",user.getToken()));
             //重定向回首页
             return "redirect:/book";
+        }else if (result.equals(CustomizeErrorCode.REGISTER_FAIL_ID_NOT_FOUND.getMessage())){
+            model.addAttribute("errorMessage",result);
+            return "error";
+        }else if (result.equals(CustomizeErrorCode.REGISTER_FAIL_ID_REGISTERED.getMessage())){
+            model.addAttribute("errorMessage",result);
+            return "error";
         }
 
-        return null;
+        model.addAttribute("errorMessage",CustomizeErrorCode.UNKNOWN_ERROR);
+        return "error";
     }
 
 

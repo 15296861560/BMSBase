@@ -1,5 +1,6 @@
 package com.bms.bms.service;
 
+import com.bms.bms.exception.CustomizeErrorCode;
 import com.bms.bms.mapper.StudentMapper;
 import com.bms.bms.mapper.UserMapper;
 import com.bms.bms.model.Student;
@@ -17,7 +18,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public boolean register(Long id,String password){
+    public String register(Long id,String password){
         //检查是否已注册
         User user=userMapper.findById(id);
         if (user==null) {
@@ -25,15 +26,15 @@ public class UserService {
             Student student = studentMapper.findById(id);
             if (student != null) {
                 createUser(student, password);
-                return true;
+                return "success";
             }
             else {
 //                该学号不存在
-                return false;
+                return CustomizeErrorCode.REGISTER_FAIL_ID_NOT_FOUND.getMessage();
             }
         }else {
 //            已注册过了
-            return false;
+            return CustomizeErrorCode.REGISTER_FAIL_ID_REGISTERED.getMessage();
         }
 
     }
