@@ -4,7 +4,7 @@
 
 <div th:fragment="nav">
     <nav class="navbar navbar-default">
-        <div class="container-fluid" style="background-color: black">
+        <div class="container-fluid" >
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">LGY图书管理云平台</a>
             </div>
@@ -13,25 +13,54 @@
 
 
                 <ul class="nav nav-pills navbar-left">
-                    <li role="presentation"><a href="/register">
-                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>图书管理</a></li>
-                    <li role="presentation"><a href="/register">
-                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>用户管理</a></li>
-                    <li role="presentation" style=""><a href="/login/admin">
-                        <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>大数据分析</a></li>
-                    <li role="presentation"><a href="/login/user">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>图书查询</a></li>
-                    <li role="presentation"><a href="/register">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>读者查询</a></li>
+                    <li class="dropdown" role="presentation">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" >
+                            <span class="glyphicon glyphicon-book" aria-hidden="true"></span>图书管理
+                        <!--下拉小箭头-->
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li><a href="/manage/sendback">归还图书</a></li>
+                            <li><a href="#">查询图书</a></li>
+                            <li><a href="#">上传新书</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" role="presentation">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" >
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>用户管理
+                            <!--下拉小箭头-->
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li><a href="#">查询用户</a></li>
+                            <li><a href="#">删除用户</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" role="presentation">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" >
+                            <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>大数据分析
+                    <!--下拉小箭头-->
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li><a href="#">读者借阅排行</a></li>
+                            <li><a href="#">图书借阅排行</a></li>
+                            <li><a href="#">图书类目统计</a></li>
+                        </ul>
+                    </li>
+
 
                 </ul>
 
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <!--检测session是否存在user-->
-                    <li class="dropdown" th:if="${session.user!=null}">
-                        <!--获取存在session中的用户名-->
+                    <!--检测session是否存在admin-->
+                    <li class="dropdown" th:if="${session.admin!=null}">
+                        <!--获取存在session中的管理员名称-->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false" >
                             <span th:text="${session.admin.getName()}"></span>
@@ -47,7 +76,7 @@
                     </li>
                     <!--当没有session的时候，显示登录注册按钮，隐藏个人信息-->
                     <li th:if="${session.admin==null}">
-                        <a href="/login/user">登录</a>
+                        <a href="/login/admin">登录</a>
                     </li>
 
                 </ul>

@@ -1,5 +1,7 @@
 package com.bms.bms.controller;
 
+import com.bms.bms.exception.CustomizeErrorCode;
+import com.bms.bms.model.Admin;
 import com.bms.bms.model.User;
 import com.bms.bms.service.AdminService;
 import com.bms.bms.service.UserService;
@@ -41,11 +43,16 @@ public class LoginController {
             HttpServletRequest request,
             HttpServletResponse response,
             Model model){
-        if (adminService.confirm(id,password))
-        return "redirect:/manage";
+        if (adminService.confirm(id,password)){
+            Admin admin= adminService.findById(id);
+            request.getSession().setAttribute("admin",admin);
+            return "redirect:/manage";
+
+        }
         else {
 //            登录失败
-            return null;
+            model.addAttribute("errorMessage", CustomizeErrorCode.LOGIN_FAIL);
+            return "error";
         }
     }
 
@@ -79,7 +86,8 @@ public class LoginController {
         }
         else {
 //            登录失败
-            return null;
+            model.addAttribute("errorMessage", CustomizeErrorCode.LOGIN_FAIL);
+            return "error";
         }
     }
 

@@ -4,4 +4,10 @@
     background-color: black;
 }
 
+.main{
+    background-color: white;
+    /*边距*/
+    margin: 0px 300px;
+}
+
 
