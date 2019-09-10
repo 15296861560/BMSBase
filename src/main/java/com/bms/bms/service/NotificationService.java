@@ -80,4 +80,20 @@ public class NotificationService {
         return notificationDTOS;
 
     }
+
+    public void sendbackSuccess(Long notificatinId) {
+        Notification notification=notificationMapper.findById(notificatinId);
+        notification.setStatus(NotificationStatusEnum.RETUENED.getStatus());
+        notification.setGmtModified(System.currentTimeMillis());
+        notificationMapper.upadteNotification(notification);
+
+    }
+
+    public void sendbackReject(Long notificatinId) {
+        Notification notification=notificationMapper.findById(notificatinId);
+        notification.setStatus(NotificationStatusEnum.LENDING.getStatus());
+        notification.setGmtModified(System.currentTimeMillis());
+        notificationMapper.upadteNotification(notification);
+
+    }
 }

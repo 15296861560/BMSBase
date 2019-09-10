@@ -6,8 +6,7 @@ import com.bms.bms.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +33,16 @@ public class ManageController {
         model.addAttribute("section","sendback");
 
         return "manage";
+    }
+
+    @GetMapping("/sendback/{notificatinId}/{action}")
+    public String handle(@PathVariable(name = "notificatinId")Long notificatinId,
+                         @PathVariable(name = "action")String action){
+        //改变该消息的状态
+        if ("agree".equals(action))
+            notificationService.sendbackSuccess(notificatinId);
+        if ("reject".equals(action))
+            notificationService.sendbackReject(notificatinId);
+        return "redirect:/sendback";
     }
 }

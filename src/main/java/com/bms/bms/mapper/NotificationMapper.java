@@ -1,10 +1,7 @@
 package com.bms.bms.mapper;
 
 import com.bms.bms.model.Notification;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,4 +23,7 @@ public interface NotificationMapper {
 
     @Select("select * from notification where status=#{status} order by gmt_create limit #{offset},#{size}")//分页查询
     List<Notification> listByStatus(@Param(value = "offset") Integer offset, @Param(value = "size")Integer size,@Param(value = "status")Integer status);
+
+    @Update("update notification set gmt_modified=#{gmtModified},status=#{status} where id=#{id}")
+    void upadteNotification(Notification notification);
 }

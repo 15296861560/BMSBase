@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/mystyle.css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <script src="/js/manage.js" type="application/javascript"></script>
 
 </head>
 
@@ -27,8 +28,8 @@
                     <div class="col-md-4"><span th:text="${notificationDTO.user.name+notificationDTO.status}"></span></div>
                     <div class="col-md-4"><a th:href="@{'/book/'+${notificationDTO.book.id}}" th:text="${notificationDTO.book.name}"></a></div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-success">归还成功</button>
-                        <button type="button" class="btn btn-danger">拒绝归还</button>
+                        <button type="button" class="btn btn-success" th:data-id="${notificationDTO.id}" onclick="agree(this)">归还成功</button>
+                        <button type="button" class="btn btn-danger" th:data-id="${notificationDTO.id}" onclick="reject(this)">拒绝归还</button>
                     </div>
                 </div>
 
