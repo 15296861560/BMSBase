@@ -19,55 +19,125 @@
 <div th:insert="~{navigation-manage::nav}"></div>
 
 <div class="container-fluid main">
-    <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 申请归还</h2>
-    <hr>
-    <div class="media"  th:each="notificationDTO:${pageDTO.getDataDTOS()}">
-        <div class="media-body">
-            <h4 class="media-heading" >
-                <div class="row">
-                    <div class="col-md-4"><span th:text="${notificationDTO.user.name+notificationDTO.status}"></span></div>
-                    <div class="col-md-4"><a th:href="@{'/book/'+${notificationDTO.book.id}}" th:text="${notificationDTO.book.name}"></a></div>
-                    <div class="col-md-4">
-                        <button type="button" class="btn btn-success" th:data-id="${notificationDTO.id}" onclick="agree(this)">归还成功</button>
-                        <button type="button" class="btn btn-danger" th:data-id="${notificationDTO.id}" onclick="reject(this)">拒绝归还</button>
+
+
+    <!--申请归还-->
+    <div th:if="${section=='sendback'}">
+        <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 申请归还</h2>
+        <hr>
+        <div class="media"  th:each="notificationDTO:${pageDTO.getDataDTOS()}">
+            <div class="media-body">
+                <h4 class="media-heading" >
+                    <div class="row">
+                        <div class="col-md-4"><span th:text="${notificationDTO.user.name+notificationDTO.status}"></span></div>
+                        <div class="col-md-4"><a th:href="@{'/book/'+${notificationDTO.book.id}}" th:text="${notificationDTO.book.name}"></a></div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-success" th:data-id="${notificationDTO.id}" onclick="agree(this)">归还成功</button>
+                            <button type="button" class="btn btn-danger" th:data-id="${notificationDTO.id}" onclick="reject(this)">拒绝归还</button>
+                        </div>
                     </div>
-                </div>
-
-
-
-            </h4>
+                </h4>
+            </div>
         </div>
+        <!--分页-->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li th:if="${pageDTO.showFirst}">
+                    <a th:href="@{/sendback/(page=1,search=${search})}" aria-label="First">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li th:if="${pageDTO.showPre}">
+                    <a th:href="@{/sendback/(page=${pageDTO.currentPage - 1},search=${search})}" aria-label="Pre">
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
+                <li th:each=" page: ${pageDTO.pages}" th:class="${pageDTO.currentPage==page}?'active':''"><a th:href="@{/sendback/(page=${page},search=${search})}" th:text="${page}" ></a></li>
+
+                <li th:if="${pageDTO.showNext}">
+                    <a th:href="@{/sendback/(page=${pageDTO.currentPage+1},search=${search})}" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+                <li th:if="${pageDTO.showEnd}">
+                    <a th:href="@{/sendback/(page=${pageDTO.totalPage},search=${search})}" aria-label="End">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+
+                </li>
+            </ul>
+        </nav>
     </div>
-    <!--分页-->
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li th:if="${pageDTO.showFirst}">
-                <a th:href="@{/sendback/(page=1,search=${search})}" aria-label="First">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
 
-            <li th:if="${pageDTO.showPre}">
-                <a th:href="@{/sendback/(page=${pageDTO.currentPage - 1},search=${search})}" aria-label="Pre">
-                    <span aria-hidden="true">&lt;</span>
-                </a>
-            </li>
-            <li th:each=" page: ${pageDTO.pages}" th:class="${pageDTO.currentPage==page}?'active':''"><a th:href="@{/sendback/(page=${page},search=${search})}" th:text="${page}" ></a></li>
+    <!--查询图书-->
+    <div th:if="${section=='checkBook'}">
+        <!--搜索框-->
+        <form class="nav nav-pills nav-justified">
+            <div class="form-group input-group-lg col-xs-8">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search " aria-hidden="true"></span>搜索</button>
+        </form>
 
-            <li th:if="${pageDTO.showNext}">
-                <a th:href="@{/sendback/(page=${pageDTO.currentPage+1},search=${search})}" aria-label="Next">
-                    <span aria-hidden="true">&gt;</span>
+        <!--显示图书列表-->
+        <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 查询图书</h2>
+        <hr>
+        <div class="container-fluid">
+        <div class="media col-xs-6 col-md-4"  th:each="bookDTO:${pageDTO.getDataDTOS()}">
+            <!--封面-->
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" th:src="${bookDTO.cover}" height="165" width="120">
                 </a>
-            </li>
-            <li th:if="${pageDTO.showEnd}">
-                <a th:href="@{/sendback/(page=${pageDTO.totalPage},search=${search})}" aria-label="End">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading" >
+                    <a th:href="@{'/book/'+${bookDTO.id}}" th:text="${bookDTO.name}"></a>
+                </h3>
+                <span class="text-gray-small">
+                        书籍编号：<span th:text="${bookDTO.number}"></span><br>
+                        书籍状态：<span th:text="${bookDTO.status}"></span><br>
+                        书籍类型:<span th:text="${bookDTO.type}"></span><br>
+                        入库时间：<span th:text="${#dates.format(bookDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span><br>
+                        变动时间：<span th:text="${#dates.format(bookDTO.gmtModified,'yyyy-MM-dd HH:mm')}"></span>
+                </span>
 
-            </li>
-        </ul>
-    </nav>
+            </div>
+        </div>
+        </div>
 
+
+        <!--分页-->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li th:if="${pageDTO.showFirst}">
+                    <a th:href="@{/checkBook/(page=1,search=${search})}" aria-label="First">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li th:if="${pageDTO.showPre}">
+                    <a th:href="@{/checkBook/(page=${pageDTO.currentPage - 1},search=${search})}" aria-label="Pre">
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
+                <li th:each=" page: ${pageDTO.pages}" th:class="${pageDTO.currentPage==page}?'active':''"><a th:href="@{/checkBook/(page=${page},search=${search})}" th:text="${page}" ></a></li>
+
+                <li th:if="${pageDTO.showNext}">
+                    <a th:href="@{/checkBook/(page=${pageDTO.currentPage+1},search=${search})}" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+                <li th:if="${pageDTO.showEnd}">
+                    <a th:href="@{/checkBook/(page=${pageDTO.totalPage},search=${search})}" aria-label="End">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
 <!--页尾-->

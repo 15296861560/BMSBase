@@ -33,9 +33,9 @@ function sendback(notificatinId,status) {
 
 function agree(e) {
     var notificatinId=e.getAttribute("data-id");
-    window.location.href="/sendback/"+notificatinId+"/agree";
+    window.location.href="/sendback/"+"agree/"+notificatinId;
 }
 function reject(e) {
     var notificatinId=e.getAttribute("data-id");
-    window.location.href="/sendback/"+notificatinId+"/reject";
+    window.location.href="/sendback/"+"reject/"+notificatinId;
 }
