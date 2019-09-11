@@ -1,6 +1,5 @@
 function sendback(notificatinId,status) {
 
-
     $.ajax({
         type: "POST",
         url: "/manage/handle",

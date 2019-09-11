@@ -138,6 +138,38 @@
             </ul>
         </nav>
     </div>
+
+
+    <!--上传新书-->
+    <div th:if="${section=='upload'}">
+        <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 上传新书</h2>
+        <hr>
+        <form action="fileUpload" method="post" enctype="multipart/form-data">
+            <div class="form-group ">
+                <label>书名:</label>
+                <input type="text" class="form-control " id="name" name="name" value="" >
+                <label>编号:</label>
+                <input type="number" class="form-control " id="number" name="number" value="">
+                <label>类型:</label>
+                <select class="form-control " id="type" >
+                    <div  th:each="type:${bookType}">
+                        <option th:text="${type.getMessage()}"></option>
+                    </div>
+
+
+                </select>
+                <label>简介:</label>
+                <textarea class="form-control" rows="10" placeholder="这本书的简介。。。"></textarea>
+                <label>封面:</label>
+                <input type="file" name="fileName"/>
+                <!--判断是否上传文件-->
+                <img src="/images/cover?fileName=${fileName}" style="width: 200px"/>
+                <br>
+                <button type="submit" class="btn btn-primary btn-block m-t-25"  >上传</button>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!--页尾-->
