@@ -45,6 +45,8 @@
 
 [图书分类](https://baike.baidu.com/item/中国图书馆图书分类法/1919634?fr=aladdin#2)
 
+[上传图片](https://www.jianshu.com/p/c101b38adade)
+
 ##工具
 [Git](https://git-scm.com/download)
 

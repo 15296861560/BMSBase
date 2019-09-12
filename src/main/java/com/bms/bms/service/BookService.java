@@ -32,7 +32,17 @@ public class BookService {
         return bookMapper.findById(id);
     }
 
-    public void createBook(Book book){
+    public void createBook(String name, Long number, String type, String brief, String src){
+        Book book=new Book();
+        book.setName(name);
+        book.setNumber(number);
+        book.setType(type);
+        book.setBrief(brief);
+        book.setCover(src);
+        book.setGmtCreate(System.currentTimeMillis());
+        book.setGmtModified(System.currentTimeMillis());
+        book.setLendCount(0);
+        book.setStatus("GOOD");
         bookMapper.createBook(book);
     }
 

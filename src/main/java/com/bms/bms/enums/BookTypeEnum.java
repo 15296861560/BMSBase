@@ -1,39 +1,39 @@
 package com.bms.bms.enums;
 
 public enum BookTypeEnum {
-    A(1,"马列主义毛邓思想"),
-    B(2,"哲学"),
-    C(3,"社会科学总论"),
-    D(4,"政治、法律"),
-    E(5,"军事"),
-    F(6,"经济"),
-    G(7,"文化、科学、教育、体育"),
-    H(8,"语言、文字"),
-    I(9,"文学"),
-    J(10,"艺术"),
-    K(11,"历史、地理"),
-    N(12,"自然科学总论"),
-    O(13,"数理科学和化学"),
-    P(14,"天文学、地球科学"),
-    Q(15,"生物科学"),
-    R(16,"医药、卫生"),
-    S(17,"农业科学"),
-    T(18,"工业技术"),
-    U(19,"交通运输"),
-    V(20,"航空、航天"),
-    X(21,"环境科学、安全科学"),
-    Z(22," 综合性图书");
+    A("A","马列主义毛邓思想"),
+    B("B","哲学"),
+    C("C","社会科学总论"),
+    D("D","政治、法律"),
+    E("E","军事"),
+    F("F","经济"),
+    G("G","文化、科学、教育、体育"),
+    H("H","语言、文字"),
+    I("I","文学"),
+    J("J","艺术"),
+    K("K","历史、地理"),
+    N("N","自然科学总论"),
+    O("O","数理科学和化学"),
+    P("P","天文学、地球科学"),
+    Q("Q","生物科学"),
+    R("R","医药、卫生"),
+    S("S","农业科学"),
+    T("T","工业技术"),
+    U("U","交通运输"),
+    V("V","航空、航天"),
+    X("X","环境科学、安全科学"),
+    Z("Z","综合性图书");
 
 
-    private Integer type;
+    private String type;
     private String message;
 
-    BookTypeEnum(Integer type, String message) {
+    BookTypeEnum(String type, String message) {
         this.type = type;
         this.message = message;
     }
 
-    public Integer getType(String message) {
+    public String getType() {
         return type;
     }
 
