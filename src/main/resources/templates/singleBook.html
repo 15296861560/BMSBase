@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/book.css">
+    <script src="/js/jquery-3.4.1.min.js" ></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+
+</head>
+
+<body>
+
+<!--导航栏-->
+<div th:insert="~{navigation::nav}"></div>
+
+<div class="container-fluid main">
+
+
+
+    <!--搜索图书-->
+    <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 搜索</h2>
+    <hr>
+    <!--搜索框-->
+    <form class="nav nav-pills nav-justified">
+        <div class="form-group input-group-lg col-xs-8">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search " aria-hidden="true"></span>搜索</button>
+    </form>
+
+        <!--显示图书-->
+        <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 类别名</h2>
+        <hr>
+        <div class="container-fluid">
+            <div class="media col-xs-6 col-md-6" >
+                <!--封面-->
+                <div class="media-left m-bottom">
+                    <a href="#">
+                        <img class="media-object" th:src="${bookDTO.cover}" height="330" width="240">
+                    </a>
+                </div>
+                <div class="media-body ">
+                    <h3 class="media-heading" >
+                        <a th:href="@{'/book/'+${bookDTO.id}}" th:text="${bookDTO.name}"></a>
+                    </h3>
+                    <span class="text-gray-small">
+                        书籍编号：<span th:text="${bookDTO.number}"></span><br>
+                        书籍状态：<span th:text="${bookDTO.status}"></span><br>
+                        书籍类型:<span th:text="${bookDTO.type}"></span><br>
+                        入库时间：<span th:text="${#dates.format(bookDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span><br>
+                        变动时间：<span th:text="${#dates.format(bookDTO.gmtModified,'yyyy-MM-dd HH:mm')}"></span>
+                </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+<!--页尾-->
+<!--<div th:insert="~{footer::foot}"></div>-->
+</body>
+</html>

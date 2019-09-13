@@ -1,17 +1,47 @@
 package com.bms.bms.controller;
 
+import com.bms.bms.dto.BookDTO;
+import com.bms.bms.dto.PageDTO;
+import com.bms.bms.enums.BookStatusEnum;
 import com.bms.bms.enums.BookTypeEnum;
+import com.bms.bms.model.Book;
+import com.bms.bms.service.BookService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookController {
 
-    @GetMapping("/book")
-    public String book(Model model){
+    @Autowired
+    BookService bookService;
 
+    @GetMapping("/book")
+    public String book(Model model,
+                       @RequestParam(name="page",defaultValue = "1")Integer page,
+                       @RequestParam(name="size",defaultValue = "9")Integer size,
+                       @RequestParam(name="search",required = false)String search){
+
+        PageDTO pageDTO=bookService.list(search,page,size);
+        model.addAttribute("pageDTO",pageDTO);
         model.addAttribute("classify", BookTypeEnum.values());
         return "book";
+    }
+
+    @GetMapping("/book/{bookId}")
+    public String bookDisplay(Model model,
+                       @PathVariable(name = "bookId")Long bookId){
+        Book book=bookService.findBookById(bookId);
+        BookDTO bookDTO=new BookDTO();
+        BeanUtils.copyProperties(book,bookDTO);//把book的所有属性拷贝到bookDTO上面
+        bookDTO.setStatus(BookStatusEnum.valueOf(book.getStatus()).getMessage());
+        bookDTO.setType(BookTypeEnum.valueOf(book.getType()).getMessage());
+        model.addAttribute("bookDTO",bookDTO);
+        return "singleBook";
+
     }
 }
