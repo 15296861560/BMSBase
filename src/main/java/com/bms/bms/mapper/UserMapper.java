@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 
 @Mapper
 public interface UserMapper {
@@ -18,4 +20,10 @@ public interface UserMapper {
 
     @Select("select * from user where token=#{token}")
     User findByToken(@Param("token") String token);
+
+    @Select("select count(1) from user")
+    Integer userCountAll();
+
+    @Select("select * from user limit #{offset},#{size}")
+    List<User> listAll(@Param(value = "offset") Integer offset, @Param(value = "size")Integer size);
 }

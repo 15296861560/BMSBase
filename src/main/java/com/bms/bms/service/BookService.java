@@ -57,8 +57,7 @@ public class BookService {
 
         PageDTO<BookDTO> pageDTO=new PageDTO();
         Integer totalCount;
-        BookDTO notificationDTO=new BookDTO();
-            totalCount = bookMapper.bookCountAll();
+        totalCount = bookMapper.bookCountAll();
         pageDTO.setPageDTO(totalCount,page,size);
         Integer offset=size*(page-1);//偏移量
         List<Book> books=bookMapper.listAll(offset,size);//分页

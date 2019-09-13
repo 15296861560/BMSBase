@@ -27,22 +27,13 @@
     <!--图书分类-->
 
     <div class="container-fluid main">
-    <!--左边-->
-    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-        <h1>hhhhhhhhhh</h1>
-    </div>
 
-    <!--中间-->
-    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-        <h1>hhhhhhhhhh</h1>
+        <div class="">
+            <div th:each="bookType:${classify}">
+                <a href="#" th:text="${bookType.getMessage()}"></a>
+            </div>
+        </div>
 
-    </div>
-
-    <!--右边-->
-    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-        <h1>hhhhhhhhhh</h1>
-
-    </div>
     </div>
 
     </div>
