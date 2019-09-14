@@ -5,7 +5,10 @@ import com.bms.bms.dto.PageDTO;
 import com.bms.bms.enums.BookStatusEnum;
 import com.bms.bms.enums.BookTypeEnum;
 import com.bms.bms.model.Book;
+import com.bms.bms.model.Notification;
+import com.bms.bms.model.User;
 import com.bms.bms.service.BookService;
+import com.bms.bms.service.NotificationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class BookController {
 
     @Autowired
     BookService bookService;
+    @Autowired
+    NotificationService notificationService;
 
     @GetMapping("/book")
     public String book(Model model,
@@ -42,6 +49,21 @@ public class BookController {
         bookDTO.setType(BookTypeEnum.valueOf(book.getType()).getMessage());
         model.addAttribute("bookDTO",bookDTO);
         return "singleBook";
+    }
 
+    @GetMapping("/book/apply/{bookId}")
+    public String apply(Model model,
+                              HttpServletRequest request,
+                              @PathVariable(name = "bookId")Long bookId){
+        User user = (User) request.getSession().getAttribute("user");
+        Notification notification=new Notification();
+        notification.setUserId(user.getId());
+        notification.setBookId(bookId);
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setGmtModified(System.currentTimeMillis());
+        notification.setStatus(3);
+        notificationService.createNotify(notification);
+        model.addAttribute("tip","申请成功请等待管理员同意");
+        return "tip";
     }
 }

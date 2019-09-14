@@ -5,9 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/book.css">
+    <link rel="stylesheet" href="/css/book.css" type="text/css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <script src="/js/book.js" type="application/javascript"></script>
 
 </head>
 
@@ -35,25 +36,36 @@
         <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 类别名</h2>
         <hr>
         <div class="container-fluid">
-            <div class="media col-xs-6 col-md-6" >
+            <div class="media col-xs-12 col-md-12" >
                 <!--封面-->
-                <div class="media-left m-bottom">
+                <div class="media-left col-xs-4 col-md-4" style="margin-bottom: 20px;">
                     <a href="#">
                         <img class="media-object" th:src="${bookDTO.cover}" height="330" width="240">
                     </a>
                 </div>
-                <div class="media-body ">
+                <div class="media-middle col-xs-4 col-md-4 ">
                     <h3 class="media-heading" >
                         <a th:href="@{'/book/'+${bookDTO.id}}" th:text="${bookDTO.name}"></a>
                     </h3>
-                    <span class="text-gray-small">
+                    <span class="text-gray-small ">
                         书籍编号：<span th:text="${bookDTO.number}"></span><br>
                         书籍状态：<span th:text="${bookDTO.status}"></span><br>
                         书籍类型:<span th:text="${bookDTO.type}"></span><br>
                         入库时间：<span th:text="${#dates.format(bookDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span><br>
-                        变动时间：<span th:text="${#dates.format(bookDTO.gmtModified,'yyyy-MM-dd HH:mm')}"></span>
-                </span>
-
+                        变动时间：<span th:text="${#dates.format(bookDTO.gmtModified,'yyyy-MM-dd HH:mm')}"></span><br>
+                        简介:<br>&emsp;&emsp;<span th:text="${bookDTO.brief}"></span><br>
+                    </span>
+                </div>
+                <div class="media-right col-xs-4 col-md-4 ">
+                    <button type="button" class="btn btn-success" th:data-id="${bookDTO.id}" style="padding: 50px;
+    padding-right: 100px;
+    padding-left: 100px;
+    margin-top: 20px;" onclick="appply(this)">申请借阅</button><br>
+                    <br>
+                    <button type="button" class="btn btn-info" style="padding: 50px;
+    padding-right: 100px;
+    padding-left: 100px;
+    margin-top: 20px;" onclick="back()">返回逛逛</button>
                 </div>
 
             </div>
@@ -64,6 +76,6 @@
 
     </div>
 <!--页尾-->
-<!--<div th:insert="~{footer::foot}"></div>-->
+<div th:insert="~{footer::foot}"></div>
 </body>
 </html>
