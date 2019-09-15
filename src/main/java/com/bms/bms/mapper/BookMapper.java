@@ -26,4 +26,10 @@ public interface BookMapper {
 
     @Select("select count(1) from book")
     Integer bookCountAll();
+
+    @Select("select count(*) from book where name regexp #{search}")//查询符合搜索条件的书的总数
+    Integer searchCount(@Param(value = "search")String search);
+
+    @Select("select * from book where name regexp #{search} order by gmt_create limit #{offset},#{size}")//带条件的分页查询
+    List<Book> listSearch(@Param(value = "offset") Integer offset, @Param(value = "size")Integer size,@Param(value = "search")String search);
 }

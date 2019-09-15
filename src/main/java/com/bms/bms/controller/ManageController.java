@@ -57,6 +57,7 @@ public class ManageController {
         PageDTO pageDTO=bookService.list(search,page,size);
         model.addAttribute("pageDTO",pageDTO);
         model.addAttribute("section","checkBook");
+        model.addAttribute("search",search);
         return "manage";
     }
 

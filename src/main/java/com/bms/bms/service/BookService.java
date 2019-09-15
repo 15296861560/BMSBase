@@ -12,12 +12,15 @@ import com.bms.bms.mapper.UserMapper;
 import com.bms.bms.model.Book;
 import com.bms.bms.model.Notification;
 import com.bms.bms.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -55,12 +58,31 @@ public class BookService {
 
     public PageDTO list(String search, Integer page, Integer size) {
 
+        if (StringUtils.isNotBlank(search)){
+            //用空格分隔search
+            String[] tags = StringUtils.split(search, " ");
+            //用|把刚刚分隔的字符串重新拼接
+            String regexTag = Arrays.stream(tags).collect(Collectors.joining("|"));
+            search=regexTag;
+
+        }
+
         PageDTO<BookDTO> pageDTO=new PageDTO();
         Integer totalCount;
-        totalCount = bookMapper.bookCountAll();
+        if (StringUtils.isNotBlank(search)) {
+            totalCount = bookMapper.searchCount(search);//符合搜索条件的书的总数
+        }else {
+            totalCount = bookMapper.bookCountAll();//书的总数
+
+        }
         pageDTO.setPageDTO(totalCount,page,size);
         Integer offset=size*(page-1);//偏移量
-        List<Book> books=bookMapper.listAll(offset,size);//分页
+        List<Book> books=new ArrayList();
+        if (StringUtils.isNotBlank(search)) {
+            books = bookMapper.listSearch(offset, size,search);//带搜索条件的分页
+        }else {
+           books = bookMapper.listAll(offset, size);//普通分页
+        }
         List<BookDTO> bookDTOS=ToDTOS(books);
         pageDTO.setDataDTOS(bookDTOS);
         return pageDTO;
