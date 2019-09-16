@@ -1,5 +1,6 @@
 package com.bms.bms.mapper;
 
+import com.bms.bms.dto.BookQueryDTO;
 import com.bms.bms.model.Book;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,8 +29,14 @@ public interface BookMapper {
     Integer bookCountAll();
 
     @Select("select count(*) from book where name regexp #{search}")//查询符合搜索条件的书的总数
-    Integer searchCount(@Param(value = "search")String search);
+    Integer searchCountByName(@Param(value = "search")String search);
 
     @Select("select * from book where name regexp #{search} order by gmt_create limit #{offset},#{size}")//带条件的分页查询
-    List<Book> listSearch(@Param(value = "offset") Integer offset, @Param(value = "size")Integer size,@Param(value = "search")String search);
+    List<Book> listSearch(BookQueryDTO bookQueryDTO);
+
+    @Select("select count(*) from book where type=#{search}")//查询某种类型的书的总数
+    Integer searchCountByType(String search);
+
+    @Select("select * from book where type=#{search} order by gmt_create limit #{offset},#{size}")
+    List<Book> listSearchByType(BookQueryDTO bookQueryDTO);
 }

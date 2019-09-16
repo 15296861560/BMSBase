@@ -2,6 +2,7 @@ package com.bms.bms.service;
 
 import com.bms.bms.dto.BookDTO;
 import com.bms.bms.dto.BookDTO;
+import com.bms.bms.dto.BookQueryDTO;
 import com.bms.bms.dto.PageDTO;
 import com.bms.bms.enums.BookStatusEnum;
 import com.bms.bms.enums.BookTypeEnum;
@@ -56,7 +57,7 @@ public class BookService {
     }
 
 
-    public PageDTO list(String search, Integer page, Integer size) {
+    public PageDTO list(String search, Integer page, Integer size,String attribute) {
 
         if (StringUtils.isNotBlank(search)){
             //用空格分隔search
@@ -67,22 +68,16 @@ public class BookService {
 
         }
 
+        BookQueryDTO bookQueryDTO=new BookQueryDTO();
+        bookQueryDTO.setAttribute(attribute);
+        bookQueryDTO.setSearch(search);
+        bookQueryDTO.setTotalCount(getTotalCount(bookQueryDTO));
+        bookQueryDTO.setSize(size);
         PageDTO<BookDTO> pageDTO=new PageDTO();
-        Integer totalCount;
-        if (StringUtils.isNotBlank(search)) {
-            totalCount = bookMapper.searchCount(search);//符合搜索条件的书的总数
-        }else {
-            totalCount = bookMapper.bookCountAll();//书的总数
-
-        }
-        pageDTO.setPageDTO(totalCount,page,size);
+        pageDTO.setPageDTO(bookQueryDTO.getTotalCount(),page,size);
         Integer offset=size*(page-1);//偏移量
-        List<Book> books=new ArrayList();
-        if (StringUtils.isNotBlank(search)) {
-            books = bookMapper.listSearch(offset, size,search);//带搜索条件的分页
-        }else {
-           books = bookMapper.listAll(offset, size);//普通分页
-        }
+        bookQueryDTO.setOffset(offset);
+        List<Book> books=getBooks(bookQueryDTO);
         List<BookDTO> bookDTOS=ToDTOS(books);
         pageDTO.setDataDTOS(bookDTOS);
         return pageDTO;
@@ -100,7 +95,31 @@ public class BookService {
             bookDTOS.add(bookDTO);
         }
         return bookDTOS;
+    }
 
+    private Integer getTotalCount(BookQueryDTO bookQueryDTO){
+        Integer totalCount=0;
+        if (StringUtils.isBlank(bookQueryDTO.getSearch())) {
+            totalCount = bookMapper.bookCountAll();//书的总数
+        }else if ("name".equals(bookQueryDTO.getAttribute())){
+            totalCount = bookMapper.searchCountByName(bookQueryDTO.getSearch());//符合搜索条件的书的总数
+        }else {
+            totalCount = bookMapper.searchCountByType(bookQueryDTO.getSearch());//符合搜索条件的书的总数
+        }
+        return totalCount;
+    }
+
+    private List<Book> getBooks(BookQueryDTO bookQueryDTO){
+        List<Book> books=new ArrayList();
+        if (StringUtils.isBlank(bookQueryDTO.getSearch())) {
+            books = bookMapper.listAll(bookQueryDTO.getOffset(),bookQueryDTO.getSize());//普通分页
+
+        }else if ("name".equals(bookQueryDTO.getAttribute())){
+            books = bookMapper.listSearch(bookQueryDTO);//带搜索条件的分页
+        }else {
+            books = bookMapper.listSearchByType(bookQueryDTO);
+        }
+        return books;
     }
 
 

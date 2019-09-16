@@ -31,11 +31,14 @@ public class BookController {
     public String book(Model model,
                        @RequestParam(name="page",defaultValue = "1")Integer page,
                        @RequestParam(name="size",defaultValue = "9")Integer size,
-                       @RequestParam(name="search",required = false)String search){
+                       @RequestParam(name="search",required = false)String search,
+                       @RequestParam(name="attribute",defaultValue = "name")String attribute){
 
-        PageDTO pageDTO=bookService.list(search,page,size);
+        PageDTO pageDTO=bookService.list(search,page,size,attribute);
         model.addAttribute("pageDTO",pageDTO);
         model.addAttribute("classify", BookTypeEnum.values());
+        model.addAttribute("attribute", attribute);
+        model.addAttribute("search", search);
         return "book";
     }
 

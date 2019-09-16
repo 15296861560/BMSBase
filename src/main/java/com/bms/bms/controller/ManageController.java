@@ -54,7 +54,7 @@ public class ManageController {
                          @RequestParam(name="size",defaultValue = "9")Integer size,
                          @RequestParam(name="search",required = false)String search){
 
-        PageDTO pageDTO=bookService.list(search,page,size);
+        PageDTO pageDTO=bookService.list(search,page,size,"name");
         model.addAttribute("pageDTO",pageDTO);
         model.addAttribute("section","checkBook");
         model.addAttribute("search",search);
