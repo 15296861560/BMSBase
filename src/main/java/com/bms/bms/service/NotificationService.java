@@ -31,9 +31,13 @@ public class NotificationService {
     public Book findBookById(Long id){
         return bookMapper.findById(id);
     }
+    public Notification findById(Long id){
+        return notificationMapper.findById(id);
+    }
     public String getStatus(Integer status){
         if (status.equals(NotificationStatusEnum.LENDING.getStatus()))return NotificationStatusEnum.LENDING.getMessage();
         if (status.equals(NotificationStatusEnum.REQUEST_RETURN.getStatus()))return NotificationStatusEnum.REQUEST_RETURN.getMessage();
+        if (status.equals(NotificationStatusEnum.REQUEST_BORROW.getStatus()))return NotificationStatusEnum.REQUEST_BORROW.getMessage();
         if (status.equals(NotificationStatusEnum.RETUENED.getStatus()))return NotificationStatusEnum.RETUENED.getMessage();
         return "没有该状态";
     }
@@ -49,16 +53,15 @@ public class NotificationService {
     }
 
 
-    public PageDTO list(String search, Integer page, Integer size) {
+    public PageDTO list(Integer page, Integer size,Integer status) {
 
         PageDTO<NotificationDTO> pageDTO=new PageDTO();
         Integer totalCount;
-        NotificationDTO notificationDTO=new NotificationDTO();
-            totalCount = notificationMapper.notificationCountByStatus(NotificationStatusEnum.REQUEST_RETURN.getStatus());//申请归还的消息总数
+            totalCount = notificationMapper.notificationCountByStatus(status);//状态为status的消息总数
         pageDTO.setPageDTO(totalCount,page,size);
 
         Integer offset=size*(page-1);//偏移量
-        List<Notification> notifications=notificationMapper.listByStatus(offset,size,NotificationStatusEnum.REQUEST_RETURN.getStatus());//分页
+        List<Notification> notifications=notificationMapper.listByStatus(offset,size,status);//分页
         List<NotificationDTO> notificationDTOS=ToDTOS(notifications);
         pageDTO.setDataDTOS(notificationDTOS);
         return pageDTO;
@@ -81,19 +84,23 @@ public class NotificationService {
 
     }
 
-    public void sendbackSuccess(Long notificatinId) {
-        Notification notification=notificationMapper.findById(notificatinId);
-        notification.setStatus(NotificationStatusEnum.RETUENED.getStatus());
-        notification.setGmtModified(System.currentTimeMillis());
-        notificationMapper.upadteNotification(notification);
-
-    }
-
-    public void sendbackReject(Long notificatinId) {
+    public void setStatusToLending(Long notificatinId) {
         Notification notification=notificationMapper.findById(notificatinId);
         notification.setStatus(NotificationStatusEnum.LENDING.getStatus());
         notification.setGmtModified(System.currentTimeMillis());
         notificationMapper.upadteNotification(notification);
-
     }
+
+        public void sendbackSuccess(Long notificatinId) {
+        Notification notification=notificationMapper.findById(notificatinId);
+        notification.setStatus(NotificationStatusEnum.RETUENED.getStatus());
+        notification.setGmtModified(System.currentTimeMillis());
+        notificationMapper.upadteNotification(notification);
+    }
+
+    public void borrowFail(Long notificatinId) {
+        Notification notification=notificationMapper.findById(notificatinId);
+        notificationMapper.deleteNotification(notificatinId);
+    }
+
 }

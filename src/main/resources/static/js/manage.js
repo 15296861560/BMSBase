@@ -38,3 +38,12 @@ function reject(e) {
     var notificatinId=e.getAttribute("data-id");
     window.location.href="/sendback/"+"reject/"+notificatinId;
 }
+
+function agreeBorrow(e) {
+    var notificatinId=e.getAttribute("data-id");
+    window.location.href="/manage/"+"agree/"+notificatinId;
+}
+function rejectBorrow(e) {
+    var notificatinId=e.getAttribute("data-id");
+    window.location.href="/manage/"+"reject/"+notificatinId;
+}

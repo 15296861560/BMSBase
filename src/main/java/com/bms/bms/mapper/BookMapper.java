@@ -2,10 +2,7 @@ package com.bms.bms.mapper;
 
 import com.bms.bms.dto.BookQueryDTO;
 import com.bms.bms.model.Book;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -39,4 +36,7 @@ public interface BookMapper {
 
     @Select("select * from book where type=#{search} order by gmt_create limit #{offset},#{size}")
     List<Book> listSearchByType(BookQueryDTO bookQueryDTO);
+
+    @Update("update book set status=#{status},gmt_modify=#{gmt_modify} where id=#{id}")
+    void changeBookStatus(Book book);
 }

@@ -64,7 +64,7 @@ public class BookController {
         notification.setBookId(bookId);
         notification.setGmtCreate(System.currentTimeMillis());
         notification.setGmtModified(System.currentTimeMillis());
-        notification.setStatus(3);
+        notification.setStatus(2);
         notificationService.createNotify(notification);
         model.addAttribute("tip","申请成功请等待管理员同意");
         return "tip";

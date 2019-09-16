@@ -2,6 +2,8 @@ package com.bms.bms.controller;
 
 import com.bms.bms.dto.NotificationDTO;
 import com.bms.bms.dto.PageDTO;
+import com.bms.bms.enums.NotificationStatusEnum;
+import com.bms.bms.model.Notification;
 import com.bms.bms.service.BookService;
 import com.bms.bms.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,38 @@ public class ManageController {
     BookService bookService;
 
     @GetMapping("/manage")
-    public String manage(Model model){
-        return "redirect:/sendback";
+    public String manage(Model model,
+                         @RequestParam(name="page",defaultValue = "1")Integer page,//通过@RequestParam注解获取名字为page的参数默认值为1类型为Integer
+                         @RequestParam(name="size",defaultValue = "5")Integer size){
+        PageDTO pageDTO=notificationService.list(page,size,NotificationStatusEnum.REQUEST_BORROW.getStatus());
+        model.addAttribute("pageDTO",pageDTO);
+        model.addAttribute("section","manage");
+
+        return "manage";
+    }
+
+    @GetMapping("/manage/{action}/{notificatinId}")
+    public String handleBorrow(@PathVariable(name = "action")String action,
+                         @PathVariable(name = "notificatinId")Long notificatinId
+    ){
+        //处理消息
+        if ("agree".equals(action)) {
+            notificationService.setStatusToLending(notificatinId);
+            Notification notification=notificationService.findById(notificatinId);
+            bookService.changeBookStatus(notification.getBookId(),"LENDING");
+        }
+        if ("reject".equals(action))
+            notificationService.borrowFail(notificatinId);
+        return "redirect:/manage";
     }
 
     @GetMapping("/sendback")
     public String sendback(Model model,
                            @RequestParam(name="page",defaultValue = "1")Integer page,//通过@RequestParam注解获取名字为page的参数默认值为1类型为Integer
-                           @RequestParam(name="size",defaultValue = "5")Integer size,
-                           @RequestParam(name="search",required = false)String search){
+                           @RequestParam(name="size",defaultValue = "5")Integer size){
 
-        PageDTO pageDTO=notificationService.list(search,page,size);
+
+        PageDTO pageDTO=notificationService.list(page,size, NotificationStatusEnum.REQUEST_RETURN.getStatus());
         model.addAttribute("pageDTO",pageDTO);
         model.addAttribute("section","sendback");
 
@@ -44,7 +67,7 @@ public class ManageController {
         if ("agree".equals(action))
             notificationService.sendbackSuccess(notificatinId);
         if ("reject".equals(action))
-            notificationService.sendbackReject(notificatinId);
+            notificationService.setStatusToLending(notificatinId);
         return "redirect:/sendback";
     }
 
@@ -60,6 +83,8 @@ public class ManageController {
         model.addAttribute("search",search);
         return "manage";
     }
+
+
 
 
 

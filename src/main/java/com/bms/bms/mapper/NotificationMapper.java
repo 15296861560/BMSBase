@@ -26,4 +26,7 @@ public interface NotificationMapper {
 
     @Update("update notification set gmt_modified=#{gmtModified},status=#{status} where id=#{id}")
     void upadteNotification(Notification notification);
+
+    @Delete("delete from notification where id=#{id}")
+    void deleteNotification(@Param(value = "id")Long id);
 }
