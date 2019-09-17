@@ -67,6 +67,14 @@ public class NotificationService {
         return pageDTO;
     }
 
+    public List<Notification> listByUserId(Long userId){
+
+        List<Notification> notifications=notificationMapper.listByUserId(userId);//查询某用户的所有消息记录
+        return notifications;
+
+
+    }
+
     //        将notifications转化为notificationDTOS
     private List<NotificationDTO> ToDTOS(List<Notification> notifications){
 

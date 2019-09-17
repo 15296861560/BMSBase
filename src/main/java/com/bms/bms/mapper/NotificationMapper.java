@@ -29,4 +29,7 @@ public interface NotificationMapper {
 
     @Delete("delete from notification where id=#{id}")
     void deleteNotification(@Param(value = "id")Long id);
+
+    @Select("select * from notification where user_id=#{userId} order by gmt_create")
+    List<Notification> listByUserId(@Param(value = "userId") Long userId);
 }

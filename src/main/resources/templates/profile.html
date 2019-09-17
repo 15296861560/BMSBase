@@ -11,9 +11,30 @@
 
 </head>
 <body>
+
+<!--导航栏-->
 <div th:insert="~{navigation::nav}"></div>
 
+<div class="container-fluid main">
+    <!--个人中心-->
+    <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 个人中心</h2>
+    <hr>
+    <!--个人资料-->
+    <div class="media col-xs-12 col-md-12">
+        <ul class="list-group">
+            <li class="list-group-item">学号：<span th:text="${userDTO.id}"></span><br></li>
+            <li class="list-group-item">姓名：<span th:text="${userDTO.name}"></span><br></li>
+            <li class="list-group-item">学院：<span th:text="${userDTO.academy}"></span><br></li>
+            <li class="list-group-item">班级：<span th:text="${userDTO.cla}"></span><br></li>
+            <li class="list-group-item">状态：<span th:text="${userDTO.status}"></span><br></li>
+            <li class="list-group-item">借阅次数：<span th:text="${userDTO.borrowCount}"></span><br></li>
+            <li class="list-group-item">注册时间：<span th:text="${#dates.format(userDTO.gmtCreate,'yyyy-MM-dd hh:mm')}"></span><br></li>
+            <li class="list-group-item">联系号码：<span th:text="${userDTO.phone}"></span><br></li>
+            <li class="list-group-item">借阅历史：<span th:text="${userDTO.history}"></span><br></li>
+        </ul>
 
+    </div>
+    </div>
 
 <div th:insert="~{footer::foot}"></div>
 

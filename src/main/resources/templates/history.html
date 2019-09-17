@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="个人阅历"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
+    <script src="/js/jquery-3.4.1.min.js" ></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+
+</head>
+<body>
+
+<!--导航栏-->
+<div th:insert="~{navigation::nav}"></div>
+
+<div class="container-fluid main">
+    <!--个人阅历-->
+    <h2><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> 个人阅历</h2>
+    <hr>
+    <!--借阅过的书籍-->
+    <div class="media col-xs-12 col-md-12">
+
+        <div class="media col-xs-4 col-md-4"  th:each="historyDTO:${historyDTOS}">
+            <!--封面-->
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" th:src="${historyDTO.bookCover}" height="165" width="120">
+                </a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading" >
+                    <a th:href="@{'/book/'+${historyDTO.bookId}}" th:text="${historyDTO.bookName}"></a>
+                </h3>
+                <!--信息-->
+                <span class="text-gray-small">
+                        书籍编号：<span th:text="${historyDTO.bookNumber}"></span><br>
+                        书籍状态：<span th:text="${historyDTO.status}"></span><br>
+                        借阅时间：<span th:text="${#dates.format(historyDTO.gmtCreate,'yyyy-MM-dd hh:mm')}"></span><br>
+                        归还时间：<span  th:text="${historyDTO.gmtModified.equals(historyDTO.gmtCreate)}?'借阅中':${#dates.format(historyDTO.gmtModified,'yyyy-MM-dd hh:mm')}"></span><br>
+                </span>
+                <!--归还图书-->
+                <span>
+                     <button type="button" class="btn btn-success" th:data-id="${historyDTO.id}" onclick="apply(this)">归还成功</button>
+                </span>
+
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+<div th:insert="~{footer::foot}"></div>
+
+</body>
+</html>

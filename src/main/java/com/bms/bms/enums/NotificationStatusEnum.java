@@ -1,7 +1,7 @@
 package com.bms.bms.enums;
 
 public enum NotificationStatusEnum {
-    LENDING(0,"借出"),
+    LENDING(0,"借阅中"),
     REQUEST_RETURN(1,"申请归还"),
     REQUEST_BORROW(2,"申请借阅"),
     RETUENED(3,"已归还");

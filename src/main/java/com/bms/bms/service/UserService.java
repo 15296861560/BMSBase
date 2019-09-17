@@ -86,10 +86,14 @@ public class UserService {
     private List<UserDTO> ToDTOS(List<User> users) {
         List<UserDTO> bookDTOS=new ArrayList();
         for(User user:users){
-            UserDTO userDTO=new UserDTO();
-            BeanUtils.copyProperties(user,userDTO);//把user的所有属性拷贝到bookDTO上面
-            bookDTOS.add(userDTO);
+            bookDTOS.add(userToDTO(user));
         }
         return bookDTOS;
+    }
+
+    public  UserDTO userToDTO(User user){
+        UserDTO userDTO=new UserDTO();
+        BeanUtils.copyProperties(user,userDTO);//把user的所有属性拷贝到bookDTO上面
+        return userDTO;
     }
 }
