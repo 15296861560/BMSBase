@@ -1,10 +1,7 @@
 package com.bms.bms.mapper;
 
 import com.bms.bms.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,4 +23,8 @@ public interface UserMapper {
 
     @Select("select * from user limit #{offset},#{size}")
     List<User> listAll(@Param(value = "offset") Integer offset, @Param(value = "size")Integer size);
+
+    @Update("update user set name=#{name},academy=#{academy},cla=#{cla},gmt_modified=#{gmtModified},status=#{status}," +
+            "borrow_count=#{borrowCount},password=#{password},history=#{history},phone=#{phone} where id=#{id}")
+    void update(User user);
 }

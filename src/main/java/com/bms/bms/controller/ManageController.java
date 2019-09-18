@@ -37,9 +37,9 @@ public class ManageController {
     ){
         //处理消息
         if ("agree".equals(action)) {
-            notificationService.setStatusToLending(notificationId);
-            Notification notification=notificationService.findById(notificationId);
-            bookService.changeBookStatus(notification.getBookId(),"LENDING");
+
+            notificationService.agree(notificationId);
+            
         }
         if ("reject".equals(action))
             notificationService.borrowFail(notificationId);

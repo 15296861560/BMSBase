@@ -12,8 +12,11 @@ import com.bms.bms.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -119,4 +122,26 @@ public class NotificationService {
         notificationMapper.deleteNotification(notificatinId);
     }
 
+    @Transactional
+    public void agree(Long notificationId) {//同意借出
+        //改变消息状态
+        setStatusToLending(notificationId);
+        Notification notification=findById(notificationId);
+        //改变书籍状态
+        Book book=findBookById(notification.getBookId());
+        book.setStatus("LENDING");
+        bookMapper.changeBookStatus(book);
+        //改变用户信息
+        User user=findUserById(notification.getUserId());
+        user.setStatus(user.getStatus()+1);
+        user.setBorrowCount(user.getBorrowCount()+1);
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        String history=user.getHistory()+"  "+simpleDateFormat.format(System.currentTimeMillis())+"借阅了<<"+book.getName()+">>";
+        user.setHistory(history);
+        user.setGmtModified(System.currentTimeMillis());
+        userMapper.update(user);
+
+
+
+    }
 }

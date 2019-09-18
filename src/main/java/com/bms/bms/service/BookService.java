@@ -35,9 +35,9 @@ public class BookService {
     public Book findBookById(Long id){
         return bookMapper.findById(id);
     }
-    public void changeBookStatus(Long bookId,String statua){
+    public void changeBookStatus(Long bookId,String status){
         Book book=bookMapper.findById(bookId);
-        book.setStatus(statua);
+        book.setStatus(status);
         bookMapper.changeBookStatus(book);
     }
 

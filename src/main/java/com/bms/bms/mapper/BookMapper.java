@@ -37,6 +37,6 @@ public interface BookMapper {
     @Select("select * from book where type=#{search} order by gmt_create limit #{offset},#{size}")
     List<Book> listSearchByType(BookQueryDTO bookQueryDTO);
 
-    @Update("update book set status=#{status},gmt_modify=#{gmt_modify} where id=#{id}")
+    @Update("update book set status=#{status},gmt_modified=#{gmtModified} where id=#{id}")
     void changeBookStatus(Book book);
 }

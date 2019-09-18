@@ -31,8 +31,8 @@
                         <div class="col-md-4"><span th:text="${notificationDTO.user.name+notificationDTO.status}"></span></div>
                         <div class="col-md-4"><a th:href="@{'/book/'+${notificationDTO.book.id}}" th:text="${notificationDTO.book.name}"></a></div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-success" th:data-id="${notificationDTO.id}" onclick="agree(this)">同意借阅</button>
-                            <button type="button" class="btn btn-danger" th:data-id="${notificationDTO.id}" onclick="reject(this)">拒绝借阅</button>
+                            <button type="button" class="btn btn-success" th:data-id="${notificationDTO.id}" onclick="agreeBorrow(this)">同意借阅</button>
+                            <button type="button" class="btn btn-danger" th:data-id="${notificationDTO.id}" onclick="rejectBorrow(this)">拒绝借阅</button>
                         </div>
                     </div>
                 </h4>
