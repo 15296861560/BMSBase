@@ -67,6 +67,7 @@ public class BookController {
         notification.setStatus(2);
         notificationService.createNotify(notification);
         model.addAttribute("tip","申请成功请等待管理员同意");
+        model.addAttribute("src","/book");
         return "tip";
     }
 }

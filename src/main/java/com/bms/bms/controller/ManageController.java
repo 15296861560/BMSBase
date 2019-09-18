@@ -31,18 +31,18 @@ public class ManageController {
         return "manage";
     }
 
-    @GetMapping("/manage/{action}/{notificatinId}")
+    @GetMapping("/manage/{action}/{notificationId}")
     public String handleBorrow(@PathVariable(name = "action")String action,
-                         @PathVariable(name = "notificatinId")Long notificatinId
+                         @PathVariable(name = "notificationId")Long notificationId
     ){
         //处理消息
         if ("agree".equals(action)) {
-            notificationService.setStatusToLending(notificatinId);
-            Notification notification=notificationService.findById(notificatinId);
+            notificationService.setStatusToLending(notificationId);
+            Notification notification=notificationService.findById(notificationId);
             bookService.changeBookStatus(notification.getBookId(),"LENDING");
         }
         if ("reject".equals(action))
-            notificationService.borrowFail(notificatinId);
+            notificationService.borrowFail(notificationId);
         return "redirect:/manage";
     }
 

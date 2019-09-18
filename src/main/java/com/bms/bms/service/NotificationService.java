@@ -106,6 +106,14 @@ public class NotificationService {
         notificationMapper.upadteNotification(notification);
     }
 
+    public void setStatusToRequestReturn(Long notificatinId) {
+        Notification notification=notificationMapper.findById(notificatinId);
+        notification.setStatus(NotificationStatusEnum.REQUEST_RETURN.getStatus());
+        notification.setGmtModified(System.currentTimeMillis());
+        notificationMapper.upadteNotification(notification);
+    }
+
+
     public void borrowFail(Long notificatinId) {
         Notification notification=notificationMapper.findById(notificatinId);
         notificationMapper.deleteNotification(notificatinId);

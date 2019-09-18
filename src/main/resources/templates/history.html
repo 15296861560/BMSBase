@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/mystyle.css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <script src="/js/profile.js"></script>
 
 </head>
 <body>
@@ -38,11 +39,11 @@
                         书籍编号：<span th:text="${historyDTO.bookNumber}"></span><br>
                         书籍状态：<span th:text="${historyDTO.status}"></span><br>
                         借阅时间：<span th:text="${#dates.format(historyDTO.gmtCreate,'yyyy-MM-dd hh:mm')}"></span><br>
-                        归还时间：<span  th:text="${historyDTO.gmtModified.equals(historyDTO.gmtCreate)}?'借阅中':${#dates.format(historyDTO.gmtModified,'yyyy-MM-dd hh:mm')}"></span><br>
+                        归还时间：<span  th:text="${historyDTO.status.equals('已归还')}?${#dates.format(historyDTO.gmtModified,'yyyy-MM-dd hh:mm')}:'借阅中'"></span><br>
                 </span>
                 <!--归还图书-->
                 <span>
-                     <button type="button" class="btn btn-success" th:data-id="${historyDTO.id}" onclick="apply(this)">归还成功</button>
+                     <button th:if="${historyDTO.status.equals('借阅中')}" type="button" class="btn btn-success" th:data-id="${historyDTO.id}" onclick="apply(this)">申请归还</button>
                 </span>
 
             </div>

@@ -31,19 +31,19 @@ function sendback(notificatinId,status) {
 }
 
 function agree(e) {
-    var notificatinId=e.getAttribute("data-id");
-    window.location.href="/sendback/"+"agree/"+notificatinId;
+    var notificationId=e.getAttribute("data-id");
+    window.location.href="/sendback/"+"agree/"+notificationId;
 }
 function reject(e) {
-    var notificatinId=e.getAttribute("data-id");
-    window.location.href="/sendback/"+"reject/"+notificatinId;
+    var notificationId=e.getAttribute("data-id");
+    window.location.href="/sendback/"+"reject/"+notificationId;
 }
 
 function agreeBorrow(e) {
-    var notificatinId=e.getAttribute("data-id");
-    window.location.href="/manage/"+"agree/"+notificatinId;
+    var notificationId=e.getAttribute("data-id");
+    window.location.href="/manage/"+"agree/"+notificationId;
 }
 function rejectBorrow(e) {
-    var notificatinId=e.getAttribute("data-id");
-    window.location.href="/manage/"+"reject/"+notificatinId;
+    var notificationId=e.getAttribute("data-id");
+    window.location.href="/manage/"+"reject/"+notificationId;
 }
