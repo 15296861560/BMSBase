@@ -102,11 +102,23 @@ public class NotificationService {
         notificationMapper.upadteNotification(notification);
     }
 
-        public void sendbackSuccess(Long notificatinId) {
+    @Transactional
+    public void sendbackSuccess(Long notificatinId) {//归还成功
+        //消息处理
         Notification notification=notificationMapper.findById(notificatinId);
         notification.setStatus(NotificationStatusEnum.RETUENED.getStatus());
         notification.setGmtModified(System.currentTimeMillis());
         notificationMapper.upadteNotification(notification);
+        //书籍信息变更
+        Book book=findBookById(notification.getBookId());
+        book.setStatus("GOOD");
+        book.setGmtModified(System.currentTimeMillis());
+        bookMapper.changeBookStatus(book);
+        //用户信息改变
+        User user=findUserById(notification.getUserId());
+        user.setStatus(user.getStatus()-1);
+        user.setGmtModified(System.currentTimeMillis());
+        userMapper.update(user);
     }
 
     public void setStatusToRequestReturn(Long notificatinId) {
@@ -130,6 +142,8 @@ public class NotificationService {
         //改变书籍状态
         Book book=findBookById(notification.getBookId());
         book.setStatus("LENDING");
+        book.setGmtModified(System.currentTimeMillis());
+        book.setLendCount(book.getLendCount()+1);
         bookMapper.changeBookStatus(book);
         //改变用户信息
         User user=findUserById(notification.getUserId());
