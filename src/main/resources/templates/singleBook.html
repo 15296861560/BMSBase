@@ -57,10 +57,11 @@
                     </span>
                 </div>
                 <div class="media-right col-xs-4 col-md-4 ">
-                    <button type="button" class="btn btn-success" th:data-id="${bookDTO.id}" style="padding: 50px;
+                    <button type="button" class="btn btn-success" th:data-id="${bookDTO.id}" th:data-status="${bookDTO.status}"
+                            style="padding: 50px;
     padding-right: 100px;
     padding-left: 100px;
-    margin-top: 20px;" onclick="appply(this)">申请借阅</button><br>
+    margin-top: 20px;" onclick="apply(this)">申请借阅</button><br>
                     <br>
                     <button type="button" class="btn btn-info" style="padding: 50px;
     padding-right: 100px;

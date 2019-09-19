@@ -1,7 +1,6 @@
 package com.bms.bms.controller;
 
 import com.bms.bms.dto.HistoryDTO;
-import com.bms.bms.dto.PageDTO;
 import com.bms.bms.dto.UserDTO;
 import com.bms.bms.enums.NotificationStatusEnum;
 import com.bms.bms.model.Book;
@@ -9,7 +8,6 @@ import com.bms.bms.model.Notification;
 import com.bms.bms.model.User;
 import com.bms.bms.service.NotificationService;
 import com.bms.bms.service.UserService;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +30,7 @@ public class ProfileController {
     public String displayProfile(Model model,
                                  HttpServletRequest httpServletRequest){
         User user=(User)httpServletRequest.getSession().getAttribute("user");
+        user=userService.findById(user.getId());//更新user信息
         UserDTO userDTO=userService.userToDTO(user);
 
         model.addAttribute("userDTO",userDTO);
@@ -77,7 +76,12 @@ public class ProfileController {
         model.addAttribute("tip","提交申请归还成功请等待管理员同意");
         model.addAttribute("src","/profile/history");
         return "tip";
+    }
 
+    @GetMapping("/profile/phone")
+    public String bindingPhone(Model model){
+
+        return "phone";
     }
 
 

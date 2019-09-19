@@ -1,7 +1,16 @@
 
-function appply(e) {
+function apply(e) {
     var bookId=e.getAttribute("data-id");
-    window.location.href="/book/"+"apply/"+bookId;
+    var bookStatus=e.getAttribute("data-status");
+    debugger;
+    //验证图书是否在库中
+    if (bookStatus=="完好"){
+        window.location.href="/book/"+"apply/"+bookId;
+    }else {
+        alert("这本书已经被借出或已经损坏了，请换本试试吧！")
+    }
+
+
 }
 function back() {
     window.location.href="/book";

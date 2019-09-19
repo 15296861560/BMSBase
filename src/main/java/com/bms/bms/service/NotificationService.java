@@ -150,7 +150,7 @@ public class NotificationService {
         user.setStatus(user.getStatus()+1);
         user.setBorrowCount(user.getBorrowCount()+1);
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-        String history=user.getHistory()+"  "+simpleDateFormat.format(System.currentTimeMillis())+"借阅了<<"+book.getName()+">>";
+        String history=user.getHistory()+"  "+simpleDateFormat.format(System.currentTimeMillis())+"借阅了<<"+book.getName()+">>;";
         user.setHistory(history);
         user.setGmtModified(System.currentTimeMillis());
         userMapper.update(user);
