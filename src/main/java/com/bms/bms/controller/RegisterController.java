@@ -42,9 +42,12 @@ public class RegisterController {
             return "redirect:/book";
         }else if (result.equals(CustomizeErrorCode.REGISTER_FAIL_ID_NOT_FOUND.getMessage())){
             model.addAttribute("errorMessage",result);
+            model.addAttribute("errorCode",CustomizeErrorCode.REGISTER_FAIL_ID_NOT_FOUND.getCode());
             return "error";
         }else if (result.equals(CustomizeErrorCode.REGISTER_FAIL_ID_REGISTERED.getMessage())){
             model.addAttribute("errorMessage",result);
+            model.addAttribute("errorCode",CustomizeErrorCode.REGISTER_FAIL_ID_REGISTERED.getCode()
+            );
             return "error";
         }
 

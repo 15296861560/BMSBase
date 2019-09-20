@@ -51,7 +51,8 @@ public class LoginController {
         }
         else {
 //            登录失败
-            model.addAttribute("errorMessage", CustomizeErrorCode.LOGIN_FAIL);
+            model.addAttribute("errorMessage", CustomizeErrorCode.LOGIN_FAIL.getMessage());
+            model.addAttribute("errorCode", CustomizeErrorCode.LOGIN_FAIL.getCode());
             return "error";
         }
     }
@@ -86,7 +87,8 @@ public class LoginController {
         }
         else {
 //            登录失败
-            model.addAttribute("errorMessage", CustomizeErrorCode.LOGIN_FAIL);
+            model.addAttribute("errorMessage", CustomizeErrorCode.LOGIN_FAIL.getMessage());
+            model.addAttribute("errorCode", CustomizeErrorCode.LOGIN_FAIL.getCode());
             return "error";
         }
     }

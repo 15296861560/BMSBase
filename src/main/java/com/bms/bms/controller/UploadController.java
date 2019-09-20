@@ -1,6 +1,7 @@
 package com.bms.bms.controller;
 
 import com.bms.bms.enums.BookTypeEnum;
+import com.bms.bms.exception.CustomizeErrorCode;
 import com.bms.bms.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,13 @@ public class UploadController {
         }else {
             msg = "fail";
         }
+
+        if (msg.equals("fail")){
+            model.addAttribute("errorMessage",CustomizeErrorCode.BOOK_UPLOAD_FAIL.getMessage());
+            model.addAttribute("errorCode", CustomizeErrorCode.BOOK_UPLOAD_FAIL.getCode());
+            return "error";
+        }
+
 
         String src="/images/cover/"+fileName;
         for(BookTypeEnum bookTypeEnum:BookTypeEnum.values()){
