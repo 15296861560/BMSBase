@@ -39,7 +39,7 @@
             <li class="list-group-item">联系号码：
                 <span th:if="${userDTO.phone==null}"><a href="/profile/phone">点击绑定</a></span><br></li>
                 <span th:if="${userDTO.phone!=null}" th:text="${userDTO.phone==null}"></span><br></li>
-            <li class="list-group-item">借阅历史：<span th:text="${userDTO.history}"></span><br></li>
+            <li class="list-group-item"><a href="/profile/history">借阅历史：</a><span th:text="${userDTO.history}"></span><br></li>
         </ul>
 
     </div>
