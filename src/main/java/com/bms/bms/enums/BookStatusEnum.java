@@ -1,19 +1,21 @@
 package com.bms.bms.enums;
 
 public enum BookStatusEnum {
-    GOOD(1,"完好"),
-    LENDING(2,"借出"),
-    LOST(3,"丢失"),
-    BAD(4,"损坏");
-    private Integer status;
+    GOOD("GOOD","完好"),
+    LENDING("LENDING","借出"),
+    LOST("LOST","丢失"),
+    BAD("BAD","损坏"),
+    APPLY_BORROW("APPLY_BORROW","申请借阅中"),
+    APPLY_RETURN("APPLY_RETURN","申请归还中");
+    private String status;
     private String message;
 
-    BookStatusEnum(Integer status, String message) {
+    BookStatusEnum(String status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 

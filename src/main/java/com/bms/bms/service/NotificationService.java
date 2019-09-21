@@ -2,6 +2,7 @@ package com.bms.bms.service;
 
 import com.bms.bms.dto.NotificationDTO;
 import com.bms.bms.dto.PageDTO;
+import com.bms.bms.enums.BookStatusEnum;
 import com.bms.bms.enums.NotificationStatusEnum;
 import com.bms.bms.mapper.BookMapper;
 import com.bms.bms.mapper.NotificationMapper;
@@ -121,11 +122,16 @@ public class NotificationService {
         userMapper.update(user);
     }
 
+    @Transactional
     public void setStatusToRequestReturn(Long notificatinId) {
         Notification notification=notificationMapper.findById(notificatinId);
         notification.setStatus(NotificationStatusEnum.REQUEST_RETURN.getStatus());
         notification.setGmtModified(System.currentTimeMillis());
         notificationMapper.upadteNotification(notification);
+        //将图书状态修改为申请归还中
+        Book book=bookMapper.findById(notification.getBookId());
+        book.setStatus(BookStatusEnum.APPLY_RETURN.getStatus());
+        bookMapper.changeBookStatus(book);
     }
 
 

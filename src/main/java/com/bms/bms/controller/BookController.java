@@ -59,6 +59,7 @@ public class BookController {
                               HttpServletRequest request,
                               @PathVariable(name = "bookId")Long bookId){
         User user = (User) request.getSession().getAttribute("user");
+        //创建借阅消息
         Notification notification=new Notification();
         notification.setUserId(user.getId());
         notification.setBookId(bookId);
@@ -66,6 +67,8 @@ public class BookController {
         notification.setGmtModified(System.currentTimeMillis());
         notification.setStatus(2);
         notificationService.createNotify(notification);
+        //将图书状态变为申请借阅中
+        bookService.changeBookStatus(bookId,BookStatusEnum.APPLY_BORROW.getStatus());
         model.addAttribute("tip","申请成功请等待管理员同意");
         model.addAttribute("src","/book");
         return "tip";

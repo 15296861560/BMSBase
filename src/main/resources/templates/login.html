@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
     <link rel="stylesheet" href="/css/login.css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
@@ -30,7 +31,7 @@
 
     <div class="fixed-page">
         <div class="tiled ">
-            <form role="form" method="post">
+            <form th:action="'/login/'+${action}" role="form" method="post">
                 <div class="form-group ">
                     <label th:text="${account}"></label>
                     <input type="text" class="form-control" name="id" value="">
