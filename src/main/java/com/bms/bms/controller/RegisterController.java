@@ -33,13 +33,15 @@ public class RegisterController {
             HttpServletResponse response,
             Model model){
         String result = userService.register(id, password);
-        if (result.equals("sussess")){
+        if (result.equals("success")){
             User user= userService.findById(id);
             request.getSession().setAttribute("user",user);
             //将token写入cookie
             response.addCookie(new Cookie("token",user.getToken()));
             //重定向回首页
-            return "redirect:/book";
+            model.addAttribute("tip","恭喜注册成功");
+            model.addAttribute("src","/book");
+            return "/tip";
         }else if (result.equals(CustomizeErrorCode.REGISTER_FAIL_ID_NOT_FOUND.getMessage())){
             model.addAttribute("errorMessage",result);
             model.addAttribute("errorCode",CustomizeErrorCode.REGISTER_FAIL_ID_NOT_FOUND.getCode());
