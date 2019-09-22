@@ -27,4 +27,7 @@ public interface UserMapper {
     @Update("update user set name=#{name},academy=#{academy},cla=#{cla},gmt_modified=#{gmtModified},status=#{status}," +
             "borrow_count=#{borrowCount},password=#{password},history=#{history},phone=#{phone} where id=#{id}")
     void update(User user);
+
+    @Delete("delete from user where id=#{userId}")
+    void deleteById(@Param(value = "userId")Long userId);
 }

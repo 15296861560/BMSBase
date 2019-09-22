@@ -96,4 +96,8 @@ public class UserService {
         BeanUtils.copyProperties(user,userDTO);//把user的所有属性拷贝到bookDTO上面
         return userDTO;
     }
+
+    public void deleteById(Long userId) {
+        userMapper.deleteById(userId);
+    }
 }
