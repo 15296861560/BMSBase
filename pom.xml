@@ -61,6 +61,13 @@
             <version>1.2.59</version>
         </dependency>
 
+        <!--Developer Tools(用于热部署）-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!--短信包服务-->
         <dependency>
             <groupId>cn.ucloud</groupId>

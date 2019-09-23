@@ -26,10 +26,6 @@ import java.util.stream.Collectors;
 @Service
 public class BookService {
     @Autowired
-    private NotificationMapper notificationMapper;
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
     private BookMapper bookMapper;
 
     public Book findBookById(Long id){
@@ -65,14 +61,11 @@ public class BookService {
     public PageDTO list(String search, Integer page, Integer size,String attribute) {
 
         if (StringUtils.isNotBlank(search)){
-            //用空格分隔search
-            String[] tags = StringUtils.split(search, " ");
-            //用|把刚刚分隔的字符串重新拼接
-            String regexTag = Arrays.stream(tags).collect(Collectors.joining("|"));
-            search=regexTag;
+            search = stringToRegex(search);
 
         }
 
+        //
         BookQueryDTO bookQueryDTO=new BookQueryDTO();
         bookQueryDTO.setAttribute(attribute);
         bookQueryDTO.setSearch(search);
@@ -86,6 +79,15 @@ public class BookService {
         List<BookDTO> bookDTOS=ToDTOS(books);
         pageDTO.setDataDTOS(bookDTOS);
         return pageDTO;
+    }
+
+    private String stringToRegex(String search) {
+        //用空格分隔search
+        String[] tags = StringUtils.split(search, " ");
+        //用|把刚刚分隔的字符串重新拼接
+        String regexTag = Arrays.stream(tags).collect(Collectors.joining("|"));
+        search=regexTag;
+        return search;
     }
 
     //        将model转化为DTO

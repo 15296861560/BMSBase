@@ -3,6 +3,7 @@ package com.bms.bms.controller;
 import com.bms.bms.dto.HistoryDTO;
 import com.bms.bms.dto.UserDTO;
 import com.bms.bms.enums.NotificationStatusEnum;
+import com.bms.bms.exception.CustomizeErrorCode;
 import com.bms.bms.model.Book;
 import com.bms.bms.model.Notification;
 import com.bms.bms.model.User;
@@ -30,6 +31,9 @@ public class ProfileController {
     public String displayProfile(Model model,
                                  HttpServletRequest httpServletRequest){
         User user=(User)httpServletRequest.getSession().getAttribute("user");
+        if (user==null){//未登录
+            return "redirect:/noLogin";
+        }
         user=userService.findById(user.getId());//更新user信息
         UserDTO userDTO=userService.userToDTO(user);
 

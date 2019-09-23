@@ -4,6 +4,7 @@ import com.bms.bms.dto.BookDTO;
 import com.bms.bms.dto.PageDTO;
 import com.bms.bms.enums.BookStatusEnum;
 import com.bms.bms.enums.BookTypeEnum;
+import com.bms.bms.exception.CustomizeErrorCode;
 import com.bms.bms.model.Book;
 import com.bms.bms.model.Notification;
 import com.bms.bms.model.User;
@@ -59,6 +60,9 @@ public class BookController {
                               HttpServletRequest request,
                               @PathVariable(name = "bookId")Long bookId){
         User user = (User) request.getSession().getAttribute("user");
+        if (user==null){//未登录
+            return "redirect:/noLogin";
+        }
         //创建借阅消息
         Notification notification=new Notification();
         notification.setUserId(user.getId());
