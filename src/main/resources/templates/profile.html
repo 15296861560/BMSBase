@@ -37,8 +37,8 @@
             <li class="list-group-item">借阅次数：<span th:text="${userDTO.borrowCount}"></span><br></li>
             <li class="list-group-item">注册时间：<span th:text="${#dates.format(userDTO.gmtCreate,'yyyy-MM-dd hh:mm')}"></span><br></li>
             <li class="list-group-item">联系号码：
-                <span th:if="${userDTO.phone==null}"><a href="/profile/phone">点击绑定</a></span><br></li>
-                <span th:if="${userDTO.phone!=null}" th:text="${userDTO.phone}"></span><br></li>
+                <span th:if="${userDTO.phone==null}"><a href="/profile/phone">点击绑定</a></span>
+                <span th:if="${userDTO.phone!=null}" th:text="${userDTO.phone}"></span></li>
             <li class="list-group-item"><a href="/profile/history">借阅历史：</a><span th:text="${userDTO.history}"></span><br></li>
         </ul>
 
