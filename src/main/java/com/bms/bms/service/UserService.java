@@ -90,8 +90,13 @@ public class UserService {
             List<User> users=userMapper.listAll(offset,size);//分页
             List<UserDTO> userDTOS=ToDTOS(users);
             pageDTO.setDataDTOS(userDTOS);
-        }else {
-
+        }else {//有搜索条件的时候
+            totalCount = userMapper.userCountBySearchName(search);
+            pageDTO.setPageDTO(totalCount,page,size);
+            Integer offset=size*(page-1);//偏移量
+            List<User> users=userMapper.listBySearch(offset,size,search);//分页
+            List<UserDTO> userDTOS=ToDTOS(users);
+            pageDTO.setDataDTOS(userDTOS);
         }
 
         return pageDTO;
@@ -121,5 +126,11 @@ public class UserService {
 
     public void deleteById(Long userId) {
         userMapper.deleteById(userId);
+    }
+
+    public void bindingPhone(User user, String phone) {//绑定手机号
+        user.setPhone(phone);
+        user.setGmtModified(System.currentTimeMillis());
+        userMapper.update(user);
     }
 }

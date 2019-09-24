@@ -26,10 +26,12 @@
     </ul>
 
     <!--图书分类-->
-
-    <div class="container-fluid m-top" style="margin-top: 30px">
+    <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 类别</h2>
+    <hr>
+    <div class="container-fluid" style="background-color: #d9edf7;">
             <div class="list-group col-xs-3 col-md-3" th:each="bookType:${classify}">
-                <a class="list-group-item " th:href="@{/book(attribute='type',search=${bookType.getType()})}" th:text="${bookType.getMessage()}"></a>
+                <a th:class="${bookType.getMessage().equals(classic)?'list-group-item m-top bg-color-aqua':'list-group-item m-top'}"
+                   th:href="@{/book(attribute='type',search=${bookType.getType()})}" th:text="${bookType.getMessage()}"></a>
             </div>
     </div>
 
@@ -46,7 +48,7 @@
         </form>
 
         <!--显示图书列表-->
-        <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 类别名</h2>
+        <h2><span th:text="${attribute.equals('type')?classic:'书库'}" class="glyphicon glyphicon-list " aria-hidden="true"></span></h2>
         <hr>
         <div class="container-fluid">
             <div class="media col-xs-6 col-md-4"  th:each="bookDTO:${pageDTO.getDataDTOS()}">

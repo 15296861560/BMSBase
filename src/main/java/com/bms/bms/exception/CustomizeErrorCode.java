@@ -8,7 +8,9 @@ public enum  CustomizeErrorCode {
     NO_LOGIN(1004,"您还未登录无法进行该操作，请登录后重试！"),
     BOOK_NOT_FOUND(2001,"您找的书籍不存在，请换一个试试吧!"),
     BOOK_UPLOAD_FAIL(2002,"图书上传失败!"),
-    UNKNOWN_ERROR(3001,"未知错误!");
+    VERIFYCODE_SEND_FAIL(3001,"验证码发送失败，请重新尝试!"),
+    VERIFYCODE_VERIFY_FAIL(3002,"验证失败，请重新尝试!"),
+    UNKNOWN_ERROR(4001,"未知错误!");
 
     private String message;
     private Integer code;

@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <script src="/js/profile.js" type="application/javascript"></script>
     <script src="/js/myjs.js" type="application/javascript"></script>
 
 </head>
@@ -19,35 +21,35 @@
 
 <div class="align-items-center ">
 
-<div class="bg">
-    <div >
-        <div class="text-center ">
-            <a href="/"><img class="img-top" src="/images/phone.png"  height="100" width="100"></a>
+    <div class="bg">
+        <div >
+            <div class="text-center ">
+                <a href="/"><img class="img-top" src="/images/phone.png"  height="100" width="100"></a>
+            </div>
+
+            <h3 class="text-center">绑定手机</h3>
+
         </div>
 
-        <h3 class="text-center">绑定手机</h3>
+        <div class="phone-page">
+            <div class="tiled ">
+                <form class="form-inline">
+                    <div>
+                        <input type="text" class="form-control pad-30" id="phone" name="phone" value="" placeholder="手机号码">
+                        <button type="button" class="btn btn-primary pad-20 m-l-30" id="send" onclick="verify()">发送短信验证码</button>
+                    </div>
+                </form>
+                    <div>
+                        <input type="text" class="form-control pad-30 m-top-30" id="verifyCode" name="verifyCode" value="" placeholder="短信验证码">
+                        <button type="button" class="btn btn-primary btn-block pad-20 m-top-30" onclick="check()" >绑定手机号</button>
+                    </div>
 
-    </div>
-
-
-    <div class="fixed-page">
-        <div class="tiled ">
-            <form action="/register" method="post"  onsubmit="return checkout()">
-                <div class="form-group ">
-                    <label>请输入您的手机号</label>
-                    <input type="number" class="form-control" id="phone" name="phone" value="">
-                    <button type="button" class="btn btn-primary btn-block m-t-25"  >发送验证码</button>
-                    <label>请输入验证码</label>
-                    <input type="text" class="form-control" id="id_code" name="id_code" value="">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block m-t-25"  >绑定手机号</button>
-            </form>
-        </div>
+            </div>
 
 
 
 
-    </div></div>
+        </div></div>
     <div id="intercom-modal-container"></div>
     <!--页尾-->
     <div th:insert="~{footer::foot}"></div>

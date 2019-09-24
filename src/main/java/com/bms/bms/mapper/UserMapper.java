@@ -30,4 +30,10 @@ public interface UserMapper {
 
     @Delete("delete from user where id=#{userId}")
     void deleteById(@Param(value = "userId")Long userId);
+
+    @Select("select count(1) from user where name regexp #{search}")
+    Integer userCountBySearchName(@Param(value = "search")String search);
+
+    @Select("select * from user where name regexp #{search} limit #{offset},#{size}")
+    List<User> listBySearch(@Param(value = "offset")Integer offset,  @Param(value = "size")Integer size,  @Param(value = "search")String search);
 }

@@ -1,19 +1,21 @@
 package com.bms.bms.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bms.bms.dto.HistoryDTO;
+import com.bms.bms.dto.ResultDTO;
 import com.bms.bms.dto.UserDTO;
 import com.bms.bms.enums.NotificationStatusEnum;
 import com.bms.bms.exception.CustomizeErrorCode;
 import com.bms.bms.model.Book;
 import com.bms.bms.model.Notification;
 import com.bms.bms.model.User;
+import com.bms.bms.provider.ZhenziProvider;
 import com.bms.bms.service.NotificationService;
 import com.bms.bms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class ProfileController {
     UserService userService;
     @Autowired
     NotificationService notificationService;
+    @Autowired
+    ZhenziProvider zhenziProvider;
 
     @GetMapping("/profile")
     public String displayProfile(Model model,
@@ -83,10 +87,48 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/phone")
-    public String bindingPhone(Model model){
+    public String bindingPhone(Model model,
+                               HttpServletRequest request){
+
 
         return "phone";
     }
+
+    @ResponseBody//把页面转化成其它结构
+    @RequestMapping(value = "/profile/phone",method = RequestMethod.POST)
+    public Object post(@RequestBody String data,
+                       HttpServletRequest request){
+        JSONObject dataJson = JSONObject.parseObject(data);
+        String phone=dataJson.getString("phone");
+        try {
+            if (zhenziProvider.sendVerifyCode(request,phone))
+                return ResultDTO.okOf();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResultDTO.errorOf(CustomizeErrorCode.VERIFYCODE_SEND_FAIL);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/profile/phone/verify",method = RequestMethod.POST)
+    public Object verify(@RequestBody JSONObject dataJson,
+                       HttpServletRequest request){
+        String phone=dataJson.getString("phone");
+        String verifyCode=dataJson.getString("verifyCode");
+        //获取存在session的验证信息
+        JSONObject verify=(JSONObject)request.getSession().getAttribute("verify");
+        String phone2=verify.getString("phone");
+        String verifyCode2=verify.getString("verifyCode");
+        //进行验证
+        if (phone.equals(phone2)&&verifyCode.equals(verifyCode2)){
+//            验证成功绑定手机号
+            User user=(User)request.getSession().getAttribute("user");
+            userService.bindingPhone(user,phone);
+            return ResultDTO.okOf();
+        }
+        else return ResultDTO.errorOf(CustomizeErrorCode.VERIFYCODE_VERIFY_FAIL);
+    }
+
 
 
 }

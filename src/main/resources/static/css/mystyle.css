@@ -43,6 +43,24 @@ body {
     margin-bottom: 200px;
 }
 
-m-top-30{
+.m-top-30{
     margin-top: 30px;
+}
+
+.pad-30{
+    padding: 30px;
+}
+
+.pad-20{
+    padding: 20px;
+}
+
+.phone-page {
+    width: 800px;
+    margin: auto;
+    padding: 100px;
+}
+
+.m-l-30{
+    margin-left: 30px;
 }

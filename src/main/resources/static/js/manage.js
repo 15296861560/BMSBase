@@ -20,3 +20,4 @@ function rejectBorrow(e) {
     var notificationId=e.getAttribute("data-id");
     window.location.href="/manage/"+"reject/"+notificationId;
 }
+

@@ -20,16 +20,17 @@
 
 <div class="container-fluid main">
 
+    <!--搜索框-->
+    <form class="nav nav-pills nav-justified search">
+        <div class="form-group input-group-lg col-xs-8">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+        </div>
+        <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search " aria-hidden="true"></span>姓名搜索</button>
+    </form>
 
     <!--查询用户-->
     <div th:if="${section=='checkUser'}">
-        <!--搜索框-->
-        <form class="nav nav-pills nav-justified search">
-            <div class="form-group input-group-lg col-xs-8">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search " aria-hidden="true"></span>搜索</button>
-        </form>
+
 
         <!--查询用户列表-->
         <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 查询用户</h2>
@@ -57,13 +58,7 @@
 
     <!--管理用户-->
         <div th:if="${section=='manageUser'}">
-            <!--搜索框-->
-            <form class="nav nav-pills nav-justified search">
-                <div class="form-group input-group-lg col-xs-8">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search " aria-hidden="true"></span>搜索</button>
-            </form>
+
         <!--管理用户列表-->
         <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 管理用户</h2>
         <hr>

@@ -4,7 +4,6 @@ import com.bms.bms.dto.BookDTO;
 import com.bms.bms.dto.PageDTO;
 import com.bms.bms.enums.BookStatusEnum;
 import com.bms.bms.enums.BookTypeEnum;
-import com.bms.bms.exception.CustomizeErrorCode;
 import com.bms.bms.model.Book;
 import com.bms.bms.model.Notification;
 import com.bms.bms.model.User;
@@ -40,6 +39,7 @@ public class BookController {
         model.addAttribute("classify", BookTypeEnum.values());
         model.addAttribute("attribute", attribute);
         model.addAttribute("search", search);
+        if ("type".equals(attribute)) model.addAttribute("classic", BookTypeEnum.valueOf(search).getMessage());
         return "book";
     }
 
