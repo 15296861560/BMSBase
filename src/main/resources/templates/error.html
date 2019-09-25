@@ -11,10 +11,13 @@
 
 </head>
 <body>
+
+<div th:insert="~{navigation::nav}"></div>
+
 <div class="container-fluid main m-top-30" style="margin-top: 30px">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="jumbotron">
+            <div class="jumbotron m-top-30">
                 <h1 th:text="${errorMessage==null?'出错了！！！':errorMessage}"></h1>
                 <p th:text="${errorCode}"></p>
                 <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>

@@ -10,7 +10,8 @@ public enum  CustomizeErrorCode {
     BOOK_UPLOAD_FAIL(2002,"图书上传失败!"),
     VERIFYCODE_SEND_FAIL(3001,"验证码发送失败，请重新尝试!"),
     VERIFYCODE_VERIFY_FAIL(3002,"验证失败，请重新尝试!"),
-    UNKNOWN_ERROR(4001,"未知错误!");
+    UNKNOWN_ERROR(4001,"未知错误!"),
+    UNFINISHED(4002,"该功能尚未实现敬请期待......");
 
     private String message;
     private Integer code;

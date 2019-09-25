@@ -31,7 +31,13 @@ body {
 
 
 .font-locatin{
-    margin-left: 400px;
+    text-align: center;
+}
+
+.p-location{
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 200px!important;
 }
 
 .bg-image{
