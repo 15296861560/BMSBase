@@ -2,7 +2,6 @@
 function apply(e) {
     var bookId=e.getAttribute("data-id");
     var bookStatus=e.getAttribute("data-status");
-    debugger;
     //验证图书是否在库中
     if (bookStatus=="完好"){
         window.location.href="/book/"+"apply/"+bookId;

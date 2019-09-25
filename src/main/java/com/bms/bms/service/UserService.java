@@ -133,4 +133,10 @@ public class UserService {
         user.setGmtModified(System.currentTimeMillis());
         userMapper.update(user);
     }
+
+    public List readerList() {//获取前10位用户借阅排行
+
+        ArrayList readerRank=userMapper.readerList();
+        return readerRank;
+    }
 }

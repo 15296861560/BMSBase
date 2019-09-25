@@ -3,6 +3,7 @@ package com.bms.bms.mapper;
 import com.bms.bms.model.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,4 +37,7 @@ public interface UserMapper {
 
     @Select("select * from user where name regexp #{search} limit #{offset},#{size}")
     List<User> listBySearch(@Param(value = "offset")Integer offset,  @Param(value = "size")Integer size,  @Param(value = "search")String search);
+
+    @Select("select * from user order by borrow_count desc limit 10")
+    ArrayList<User> readerList();
 }

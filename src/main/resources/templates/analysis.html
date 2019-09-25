@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
+<head>
+    <title>图书管理系统(管理端）</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
+    <script src="/js/jquery-3.4.1.min.js" ></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <script src="/js/manage.js" type="application/javascript"></script>
+    <script src="/js/echarts.min.js"></script>
+
+</head>
+
+<body style="height: 100%; margin: 0">
+
+<!--导航栏-->
+<div th:insert="~{navigation-manage::nav}"></div>
+
+
+<input type="hidden" th:value="${readerName}" id="readerData">
+
+
+        <div id="container" style="height: 100%; -webkit-tap-highlight-color: transparent; user-select: none;" _echarts_instance_="ec_1569415231470"><div style="position: relative; overflow: hidden; width: 1920px; height: 887px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="1920" height="887" style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 887px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div></div>
+
+
+
+    <script type="text/javascript">
+
+        // var readerData=document.getElementById("readerData");
+        // var data=new Array();
+        // var i=0;
+        // for(var p in readerData){
+        //     data[i]=p;
+        //     i++;
+        // }
+
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        var option = {
+            dataset: {
+                source: [
+                    ['score', 'amount', 'product'],
+                    [89.3, 1, 'jack'],
+                    [57.1, 2, 'mary'],
+                    [74.4, 3, '张三'],
+                    [32.7, 4, '梁光毅']
+                ]
+            },
+            grid: {containLabel: true},
+            xAxis: {name: '阅读数量/本'},
+            yAxis: {name: '读者姓名',type: 'category'},
+            visualMap: {
+                orient: 'horizontal',
+                left: 'center',
+                min: 10,
+                max: 100,
+                text: ['High Score', 'Low Score'],
+                // Map the score column to color
+                dimension: 0,
+                inRange: {
+                    color: ['#D7DA8B', '#E15457']
+                }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    encode: {
+                        // Map the "amount" column to X axis.
+                        x: 'amount',
+                        // Map the "product" column to Y axis
+                        y: 'product'
+                    }
+                }
+            ]
+        };
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+
+
+
+
+
+
+
+
+<!--页尾-->
+<div th:insert="~{footer::foot}"></div>
+</body>
+</html>
