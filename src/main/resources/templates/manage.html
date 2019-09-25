@@ -140,9 +140,7 @@
                 </a>
             </div>
             <div class="media-body">
-                <h3 class="media-heading" >
-                    <a th:href="@{'/book/'+${bookDTO.id}}" th:text="${bookDTO.name}"></a>
-                </h3>
+                <h3 class="media-heading" th:text="${bookDTO.name}"></h3>
                 <span class="text-gray-small">
                         书籍编号：<span th:text="${bookDTO.number}"></span><br>
                         书籍状态：<span th:text="${bookDTO.status}"></span><br>

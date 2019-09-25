@@ -103,4 +103,10 @@ public class LoginController {
         return "redirect:/";
     }
 
+    @GetMapping("/logout/admin")
+    public String logoutAdmin(HttpServletRequest request,HttpServletResponse response){
+        request.getSession().removeAttribute("admin");//移除session中的admin
+        return "redirect:/";
+    }
+
 }
