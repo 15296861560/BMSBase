@@ -40,7 +40,11 @@ function check() {
             if (response.code == 200) {//验证成功，跳转到个人资料页面
                 window.open("/profile");
             } else {
-                alert("验证失败,请重新尝试");
+                // alert("验证失败,请重新尝试");
+                Swal.fire({
+                    type: 'error',
+                    title: '验证失败,请重新尝试！',
+                })
             }
         }
     });

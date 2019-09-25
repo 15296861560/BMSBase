@@ -30,11 +30,11 @@
     <!--借阅过的书籍-->
     <div class="media col-xs-12 col-md-12">
 
-        <div class="media col-xs-4 col-md-4"  th:each="historyDTO:${historyDTOS}">
+        <div class="col-xs-4 col-md-4"  th:each="historyDTO:${historyDTOS}">
             <!--封面-->
             <div class="media-left">
                 <a href="#">
-                    <img class="media-object" th:src="${historyDTO.bookCover}" height="165" width="120">
+                    <img class="media-object m-b-30" th:src="${historyDTO.bookCover}" height="165" width="120">
                 </a>
             </div>
             <div class="media-body">

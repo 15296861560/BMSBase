@@ -47,10 +47,16 @@
 
 [上传图片](https://www.jianshu.com/p/c101b38adade)
 
+[榛子云短信](http://smsow.zhenzikj.com/doc/java_sdk_doc.html)
+
+[SweetAlert](https://sweetalert2.github.io)
+
+[Echarts](https://www.echartsjs.com/zh/index.html)
+
+
+
 ##工具
 [Git](https://git-scm.com/download)
-
-[Visual Paradigm](https://www.visual-paradigm.com/cn/)
 
 [lombok](https://projectlombok.org/)
 

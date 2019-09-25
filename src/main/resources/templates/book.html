@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/book.css">
     <script src="/js/jquery-3.4.1.min.js" ></script>
     <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <script src="/js/myjs.js" type="application/javascript"></script>
+
 
 </head>
 
@@ -25,10 +27,24 @@
         <li role="presentation"><a href="#">关于本馆</a></li>
     </ul>
 
+    <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 搜索</h2>
+    <hr>
+    <!--查询图书-->
+    <!--搜索框-->
+    <form class="nav nav-pills nav-justified search">
+        <div class="form-group input-group-lg col-xs-8">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+        </div>
+        <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search " aria-hidden="true"></span>搜索</button>
+    </form>
+
     <!--图书分类-->
     <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 类别</h2>
     <hr>
     <div class="container-fluid" style="background-color: #d9edf7;">
+        <div class="list-group col-xs-3 col-md-3">
+            <a href="/book" th:class="${attribute.equals('type')?'list-group-item m-top':'list-group-item m-top bg-color-aqua'}">全部分类</a>
+        </div>
             <div class="list-group col-xs-3 col-md-3" th:each="bookType:${classify}">
                 <a th:class="${bookType.getMessage().equals(classic)?'list-group-item m-top bg-color-aqua':'list-group-item m-top'}"
                    th:href="@{/book(attribute='type',search=${bookType.getType()})}" th:text="${bookType.getMessage()}"></a>
@@ -36,22 +52,13 @@
     </div>
 
     <!--显示图书-->
-    <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 搜索</h2>
-    <hr>
-    <!--查询图书-->
-        <!--搜索框-->
-        <form class="nav nav-pills nav-justified">
-            <div class="form-group input-group-lg col-xs-8">
-                <input type="text" class="form-control" placeholder="Search" name="search">
-            </div>
-            <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search " aria-hidden="true"></span>搜索</button>
-        </form>
+
 
         <!--显示图书列表-->
-        <h2><span th:text="${attribute.equals('type')?classic:'书库'}" class="glyphicon glyphicon-list " aria-hidden="true"></span></h2>
+        <h2><span th:text="${attribute.equals('type')?classic:'全部分类'}" class="glyphicon glyphicon-list " aria-hidden="true"></span></h2>
         <hr>
         <div class="container-fluid">
-            <div class="media col-xs-6 col-md-4"  th:each="bookDTO:${pageDTO.getDataDTOS()}">
+            <div class="col-xs-6 col-md-4 m-b-30"  th:each="bookDTO:${pageDTO.getDataDTOS()}">
                 <!--封面-->
                 <div class="media-left">
                     <a th:href="@{'/book/'+${bookDTO.id}}">
@@ -109,4 +116,14 @@
 <!--页尾-->
 <div th:insert="~{footer::foot}"></div>
 </body>
+<script type="text/javascript">
+    // 鼠标移动到图片上的时候会发生变化
+    $('img.media-object').on('mouseenter', function () {
+        $(this).css('animation', 'img-move .5s linear forwards')
+    });
+    $('img.media-object').on('mouseleave', function () {
+        $(this).css('animation', 'img-leave .5s linear forwards')
+    })
+</script>
+
 </html>

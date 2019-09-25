@@ -25,7 +25,13 @@ public class UserManageController {
     public String searchUser(Model model,
                          @RequestParam(name="page",defaultValue = "1")Integer page,
                          @RequestParam(name="size",defaultValue = "9")Integer size,
-                         @RequestParam(name="search",required = false)String search){
+                         @RequestParam(name="search",required = false)String search,
+                                         HttpServletRequest httpServletRequest){
+
+        Admin admin=(Admin)httpServletRequest.getSession().getAttribute("admin");
+        if (admin==null){//未登录
+            return "redirect:/noLogin";
+        }
 
         PageDTO pageDTO=userService.list(search,page,size);
         model.addAttribute("pageDTO",pageDTO);

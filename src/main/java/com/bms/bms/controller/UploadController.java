@@ -69,7 +69,7 @@ public class UploadController {
         }
 
         model.addAttribute("bookName",name);
-        model.addAttribute("src",src);
+//        model.addAttribute("src",src);图片延迟缓存，有时会加载不出，所以取消上传成功后显示图片
         model.addAttribute("msg",msg);
         model.addAttribute("bookType", BookTypeEnum.values());
         model.addAttribute("section","upload");

@@ -4,32 +4,52 @@ function checkout() {
     var id = $("#id").val();
     var password = $("#password").val();
     var re_password = $("#re_password").val();
-    debugger;
-    if (id.value == "")
+    if (id=="")
     {
-        alert("学号不能为空，请输入学号！");
+        // alert("学号不能为空，请输入学号！");
+        Swal.fire({
+            type: 'error',
+            title: '您学号不能为空',
+            text: '请输入学号！',
+        })
+
         $("#id").focus();
         return false;
     }
-    if (password.value == "")
+    if (password=="")
     {
-        alert("您的密码不能为空，请输入密码！");
+        // alert("您的密码不能为空，请输入密码！");
+        Swal.fire({
+            type: 'error',
+            title: '您的密码不能为空',
+            text: '请输入密码！',
+        })
         $("#password").focus();
         return false;
     }
-    if (re_password.value == "")
+    if (re_password== "")
     {
-        alert("用户确认密码不能为空，请输入密码！");
+        // alert("您的确认密码不能为空，请输入密码！");
+        Swal.fire({
+            type: 'error',
+            title: '您的确认密码不能为空',
+            text: '请输入确认密码！',
+        })
         $("#re_password").focus();
         return false;
     }
     if (password!= re_password)
     {
-        alert("密码与确认密码不同");
+        // alert("密码与确认密码不同");
+        Swal.fire({
+            type: 'error',
+            title: '密码与确认密码不同！',
+        })
         $("#re_password").focus();
         return false;
     }
     return true;
 
 }
+
 

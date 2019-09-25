@@ -120,6 +120,8 @@
 
     <!--查询图书-->
     <div th:if="${section=='checkBook'}">
+        <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 搜索</h2>
+        <hr>
         <!--搜索框-->
         <form class="nav nav-pills nav-justified search" action="/checkBook">
             <div class="form-group input-group-lg col-xs-8">
@@ -132,7 +134,7 @@
         <h2><span class="glyphicon glyphicon-list " aria-hidden="true"></span> 查询图书</h2>
         <hr>
         <div class="container-fluid">
-        <div class="media col-xs-6 col-md-4"  th:each="bookDTO:${pageDTO.getDataDTOS()}">
+        <div class="col-xs-6 col-md-4 m-b-30"  th:each="bookDTO:${pageDTO.getDataDTOS()}">
             <!--封面-->
             <div class="media-left">
                 <a href="#">
@@ -213,7 +215,7 @@
         </form>
         <!--判断是否成功上传文件-->
         <div th:if="${msg=='success'}">
-            <h2><img th:src="${src}"/><span th:text="${bookName}+'上传成功！'"></span></h2>
+            <h2><span th:text="${bookName}+'上传成功！'"></span></h2>
 
         </div>
         <div th:if="${msg=='fail'}">
@@ -224,6 +226,16 @@
 </div>
 
 <!--页尾-->
-<!--<div th:insert="~{footer::foot}"></div>-->
+<div th:insert="~{footer::foot}"></div>
 </body>
+<script type="text/javascript">
+    // 鼠标移动到图片上的时候会发生变化
+    $('img.media-object').on('mouseenter', function () {
+        $(this).css('animation', 'img-move .5s linear forwards')
+    });
+    $('img.media-object').on('mouseleave', function () {
+        $(this).css('animation', 'img-leave .5s linear forwards')
+    })
+</script>
+
 </html>
