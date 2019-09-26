@@ -6,7 +6,12 @@ function apply(e) {
     if (bookStatus=="完好"){
         window.location.href="/book/"+"apply/"+bookId;
     }else {
-        alert("这本书已经被借出或已经损坏了，请换本试试吧！")
+        // alert("这本书已经被借出或已经损坏了，请换本试试吧！")
+        Swal.fire({
+            type: 'error',
+            title: '这本书已经被借出或已经损坏了...',
+            text: '请换本试试吧！',
+        })
     }
 
 

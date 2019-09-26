@@ -122,7 +122,8 @@ public class ProfileController {
         //进行验证
         if (phone.equals(phone2)&&verifyCode.equals(verifyCode2)){
 //            验证成功绑定手机号
-            User user=(User)request.getSession().getAttribute("user");
+            User userSession=(User)request.getSession().getAttribute("user");
+            User user=userService.findById(userSession.getId());
             userService.bindingPhone(user,phone);
             return ResultDTO.okOf();
         }

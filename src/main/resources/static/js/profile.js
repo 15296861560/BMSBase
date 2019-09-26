@@ -38,7 +38,7 @@ function check() {
         }),
         success: function (response) {
             if (response.code == 200) {//验证成功，跳转到个人资料页面
-                window.open("/profile");
+                window.location("/profile");
             } else {
                 // alert("验证失败,请重新尝试");
                 Swal.fire({
