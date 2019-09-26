@@ -125,6 +125,10 @@ public class BookService {
     }
 
 
+    public List<Book> bookRankList() {
 
+        ArrayList bookRank=bookMapper.bookRankList();
 
+        return null;
+    }
 }

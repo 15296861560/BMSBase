@@ -4,6 +4,7 @@ import com.bms.bms.dto.BookQueryDTO;
 import com.bms.bms.model.Book;
 import org.apache.ibatis.annotations.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,4 +40,7 @@ public interface BookMapper {
 
     @Update("update book set status=#{status},gmt_modified=#{gmtModified},lend_count=#{lendCount} where id=#{id}")
     void  changeBookStatus(Book book);
+
+    ArrayList bookRankList();
+
 }
