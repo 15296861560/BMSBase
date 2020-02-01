@@ -129,6 +129,6 @@ public class BookService {
 
         ArrayList bookRank=bookMapper.bookRankList();
 
-        return null;
+        return bookRank;
     }
 }

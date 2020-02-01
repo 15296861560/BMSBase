@@ -41,6 +41,7 @@ public interface BookMapper {
     @Update("update book set status=#{status},gmt_modified=#{gmtModified},lend_count=#{lendCount} where id=#{id}")
     void  changeBookStatus(Book book);
 
-    ArrayList bookRankList();
+    @Select("select * from book order by lend_count desc limit 10")
+    ArrayList<Book> bookRankList();
 
 }
